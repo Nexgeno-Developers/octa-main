@@ -139,13 +139,13 @@
                    <div class="main">
           <div class="big_circle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="web design icon" />
+              <img src="images/im-circle.png" alt="web design icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/game-design-icon.png" alt="game design icon" /> -->
             </div>
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="game dev icon" />
+              <img src="images/im-circle.png" alt="game dev icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/ui-ux-icon.png" alt="ui-ux icon" /> -->
@@ -153,7 +153,7 @@
           </div>
           <div class="cir_cle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="app icon" />
+              <img src="images/im-circle.png" alt="app icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/blockchain-icon.png" alt="blockchain icon" /> -->
@@ -833,13 +833,13 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
                    <div class="main">
           <div class="big_circle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="web design icon" />
+              <img src="images/im-circle.png" alt="web design icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/game-design-icon.png" alt="game design icon" /> -->
             </div>
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="game dev icon" />
+              <img src="images/im-circle.png" alt="game dev icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/ui-ux-icon.png" alt="ui-ux icon" /> -->
@@ -847,7 +847,7 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
           </div>
           <div class="cir_cle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="app icon" />
+              <img src="images/im-circle.png" alt="app icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/blockchain-icon.png" alt="blockchain icon" /> -->
@@ -878,14 +878,14 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
                    <div class="main">
           <div class="big_circle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="web design icon" />
+              <img src="images/im-circle.png" alt="web design icon" />
               <!--<img src="/img/vendor/others.jpg" alt="web design icon" />-->
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/game-design-icon.png" alt="game design icon" /> -->
             </div>
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="game dev icon" />
+              <img src="images/im-circle.png" alt="game dev icon" />
               <!--<img src="/img/vendor/juniper.png" alt="web design icon" />-->
             </div>
             <div class="ic_block">
@@ -894,7 +894,7 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
           </div>
           <div class="cir_cle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="app icon" />
+              <img src="images/im-circle.png" alt="app icon" />
               <!--<img src="/img/vendor/cisco.png" alt="app icon" />-->
             </div>
             <div class="ic_block">
