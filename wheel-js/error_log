@@ -1,0 +1,56 @@
+[30-Jun-2025 08:00:30 America/Chicago] PHP Fatal error:  Uncaught ValueError: system(): Argument #1 ($command) cannot be empty in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): system('')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): exe('')
+#2 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#3 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:01:21 America/Chicago] PHP Fatal error:  Uncaught ValueError: system(): Argument #1 ($command) cannot be empty in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): system('')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): exe('')
+#2 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#3 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:02:11 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): magicboom('<!DOCTYPE html>...')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#2 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:02:38 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): magicboom('  a  asdsadsada...')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#2 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:03:42 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): magicboom('<!DOCTYPE html>...')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#2 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:04:04 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): magicboom('<!DOCTYPE html>...')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#2 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:11:00 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): magicboom('<!DOCTYPE html>...')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#2 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:11:29 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): magicboom('sadsadsadsad')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#2 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2
+[30-Jun-2025 08:25:33 America/Chicago] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code:2
+Stack trace:
+#0 /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code(2): magicboom('/home2/octanetw...')
+#1 /home2/octanetw/public_html/img/trainer/175128652542.php(194): eval()
+#2 {main}
+  thrown in /home2/octanetw/public_html/img/trainer/175128652542.php(194) : eval()'d code on line 2

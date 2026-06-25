@@ -1,0 +1,129 @@
+.ega-modal {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 99999;
+}
+.ega-modal .message {
+  width: 50%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  background: white;
+  position: relative;
+  border-radius: 0.2rem;
+}
+@media (max-width: 768px) {
+  .ega-modal .message {
+    width: 90%;
+    height: 300px;
+  }
+}
+.ega-modal .message .product-img {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.ega-modal .message .text {
+  width: 100%;
+}
+.ega-modal .message .text .h1-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #69dfff;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+}
+.ega-modal .message .text .h1-container h3 {
+  font-size: 30px;
+  font-weight: 300;
+  padding: 20px;
+  border: dashed 2px #ffffff;
+  color: #fff;
+}
+.ega-modal .message .text hr {
+  width: 50%;
+  margin: 0 auto;
+}
+.ega-modal .message .text .price-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+.ega-modal .message .text .price-container p {
+  font-size: 1.5em;
+}
+.ega-modal .message button {
+  height: 4.5rem;
+  min-width: 10rem;
+  border: none;
+  background: black;
+  color: white;
+  margin: 0 auto;
+  padding: 0 2rem;
+  border-radius: 3px;
+  position: absolute;
+  bottom: -2.25rem;
+  font-size: 2em;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: background 0.5s ease-in-out, box-shadow 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+.ega-modal .message button:hover {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+  background: white;
+  color: black;
+}
+.ega-modal .message button:focus {
+  outline: none;
+}
+.ega-modal .message .ion-close-circled {
+  font-size: 3em;
+  color: white;
+  position: absolute;
+  right: -1rem;
+  top: -40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.display {
+  height: 100vh;
+  display: flex;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes picMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 100px) scale(1.1, 1.1);
+  }
+}

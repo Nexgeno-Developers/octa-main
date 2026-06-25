@@ -1,0 +1,745 @@
+@-webkit-keyframes asd {
+    0% {
+        z-index: 2
+    }
+
+    to {
+        z-index: 4
+    }
+}
+
+@-moz-keyframes asd {
+    0% {
+        z-index: 2
+    }
+
+    to {
+        z-index: 4
+    }
+}
+
+@-o-keyframes asd {
+    0% {
+        z-index: 2
+    }
+
+    to {
+        z-index: 4
+    }
+}
+
+@keyframes asd {
+    0% {
+        z-index: 2
+    }
+
+    to {
+        z-index: 4
+    }
+}
+
+@-webkit-keyframes turn {
+    0% {
+        -webkit-transform: rotateX(90deg)
+    }
+
+    to {
+        -webkit-transform: rotateX(0deg)
+    }
+}
+
+@-moz-keyframes turn {
+    0% {
+        -moz-transform: rotateX(90deg)
+    }
+
+    to {
+        -moz-transform: rotateX(0deg)
+    }
+}
+
+@-o-keyframes turn {
+    0% {
+        -o-transform: rotateX(90deg)
+    }
+
+    to {
+        -o-transform: rotateX(0deg)
+    }
+}
+
+@keyframes turn {
+    0% {
+        transform: rotateX(90deg)
+    }
+
+    to {
+        transform: rotateX(0deg)
+    }
+}
+
+@-webkit-keyframes turn2 {
+    0% {
+        -webkit-transform: rotateX(0deg)
+    }
+
+    to {
+        -webkit-transform: rotateX(-90deg)
+    }
+}
+
+@-moz-keyframes turn2 {
+    0% {
+        -moz-transform: rotateX(0deg)
+    }
+
+    to {
+        -moz-transform: rotateX(-90deg)
+    }
+}
+
+@-o-keyframes turn2 {
+    0% {
+        -o-transform: rotateX(0deg)
+    }
+
+    to {
+        -o-transform: rotateX(-90deg)
+    }
+}
+
+@keyframes turn2 {
+    0% {
+        transform: rotateX(0deg)
+    }
+
+    to {
+        transform: rotateX(-90deg)
+    }
+}
+
+@-webkit-keyframes show {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@-moz-keyframes show {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@-o-keyframes show {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes show {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes hide {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+@-moz-keyframes hide {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+@-o-keyframes hide {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+.flip-clock-wrapper * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden
+}
+
+.flip-clock-wrapper a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #ccc
+}
+
+.flip-clock-wrapper a:hover {
+    color: #fff
+}
+
+.flip-clock-wrapper ul {
+    list-style: none;
+    position: relative;
+    float: left;
+    margin: 5px;
+    width: 60px;
+    height: 90px;
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 87px;
+    border-radius: 6px;
+    background: #000
+}
+
+.flip-clock-wrapper.clearfix:after,
+.flip-clock-wrapper.clearfix:before,
+.flip-clock-wrapper:after,
+.flip-clock-wrapper:before {
+    content: " ";
+    display: table
+}
+
+.flip-clock-wrapper.clearfix:after,
+.flip-clock-wrapper:after {
+    clear: both
+}
+
+.flip-clock-wrapper.clearfix {
+    zoom: 1
+}
+
+.flip-clock-wrapper {
+    font: 11px "Helvetica Neue", Helvetica, sans-serif;
+    -webkit-user-select: none
+}
+
+.flip-clock-meridium {
+    background: 0 0 !important;
+    box-shadow: 0 0 0 !important;
+    font-size: 36px !important
+}
+
+.flip-clock-meridium a {
+    color: #313333
+}
+
+.flip-clock-wrapper {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    margin: 1em
+}
+
+.flip-clock-wrapper ul li {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 87px;
+    text-decoration: none !important
+}
+
+.flip-clock-wrapper ul li:first-child {
+    z-index: 2
+}
+
+.flip-clock-wrapper ul li a {
+    display: block;
+    height: 100%;
+    -webkit-perspective: 200px;
+    -moz-perspective: 200px;
+    perspective: 200px;
+    margin: 0 !important;
+    overflow: visible !important;
+    cursor: default !important
+}
+
+.flip-clock-wrapper ul li a div {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    font-size: 80px;
+    overflow: hidden;
+    outline: 1px solid transparent
+}
+
+.flip-clock-wrapper ul li a div .shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2
+}
+
+.flip-clock-wrapper ul li a div.up {
+    -webkit-transform-origin: 50% 100%;
+    -moz-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    -o-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    top: 0
+}
+
+.flip-clock-wrapper ul li a div.up:after {
+    content: "";
+    position: absolute;
+    top: 44px;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, .4)
+}
+
+.flip-clock-wrapper ul li a div.down {
+    -webkit-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    bottom: 0;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px
+}
+
+.flip-clock-wrapper ul li a div div.inn {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 200%;
+    color: #ccc;
+    text-shadow: 0 1px 2px #000;
+    text-align: center;
+    background-color: #333;
+    border-radius: 6px;
+    font-size: 70px
+}
+
+.flip-clock-wrapper ul li a div.up div.inn {
+    top: 0
+}
+
+.flip-clock-wrapper ul li a div.down div.inn {
+    bottom: 0
+}
+
+.flip-clock-wrapper ul li.flip-clock-active,
+.flip-clock-wrapper ul.play li.flip-clock-before {
+    z-index: 3
+}
+
+.flip-clock-wrapper .flip {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .7)
+}
+
+.flip-clock-wrapper ul.play li.flip-clock-active {
+    -webkit-animation: asd .01s .49s linear both;
+    -moz-animation: asd .01s .49s linear both;
+    animation: asd .01s .49s linear both;
+    z-index: 5
+}
+
+.flip-clock-divider {
+    float: left;
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 100px
+}
+
+.flip-clock-divider:first-child {
+    width: 0
+}
+
+.flip-clock-dot {
+    display: block;
+    background: #323434;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+    left: 5px
+}
+
+.flip-clock-divider .flip-clock-label {
+    position: absolute;
+    top: -1.5em;
+    right: -86px;
+    color: #000;
+    text-shadow: none
+}
+
+.flip-clock-divider.minutes .flip-clock-label {
+    right: -88px
+}
+
+.flip-clock-divider.seconds .flip-clock-label {
+    right: -91px
+}
+
+.flip-clock-dot.top {
+    top: 30px
+}
+
+.flip-clock-dot.bottom {
+    bottom: 30px
+}
+
+.flip-clock-wrapper ul.play li.flip-clock-active .down {
+    z-index: 2;
+    -webkit-animation: turn .5s .5s linear both;
+    -moz-animation: turn .5s .5s linear both;
+    animation: turn .5s .5s linear both
+}
+
+.flip-clock-wrapper ul.play li.flip-clock-before .up {
+    z-index: 2;
+    -webkit-animation: turn2 .5s linear both;
+    -moz-animation: turn2 .5s linear both;
+    animation: turn2 .5s linear both
+}
+
+.flip-clock-wrapper ul.play li.flip-clock-active .up .shadow,
+.flip-clock-wrapper ul.play li.flip-clock-before .up .shadow {
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, .1) 0%, #000 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, .1)), color-stop(100%, #000));
+    background: linear, top, rgba(0, 0, 0, .1) 0%, black 100%;
+    background: -o-linear-gradient(top, rgba(0, 0, 0, .1) 0%, #000 100%);
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, .1) 0%, black 100%);
+    background: linear, to bottom, rgba(0, 0, 0, .1) 0%, black 100%;
+    -webkit-animation: show .5s linear both;
+    -moz-animation: show .5s linear both;
+    animation: show .5s linear both
+}
+
+.flip-clock-wrapper ul.play li.flip-clock-active .up .shadow {
+    -webkit-animation: hide .5s .3s linear both;
+    -moz-animation: hide .5s .3s linear both;
+    animation: hide .5s .3s linear both
+}
+
+.flip-clock-wrapper ul.play li.flip-clock-active .down .shadow,
+.flip-clock-wrapper ul.play li.flip-clock-before .down .shadow {
+    background: -moz-linear-gradient(top, #000 0%, rgba(0, 0, 0, .1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000), color-stop(100%, rgba(0, 0, 0, .1)));
+    background: linear, top, black 0%, rgba(0, 0, 0, .1) 100%;
+    background: -o-linear-gradient(top, #000 0%, rgba(0, 0, 0, .1) 100%);
+    background: -ms-linear-gradient(top, black 0%, rgba(0, 0, 0, .1) 100%);
+    background: linear, to bottom, black 0%, rgba(0, 0, 0, .1) 100%;
+    -webkit-animation: show .5s linear both;
+    -moz-animation: show .5s linear both;
+    animation: show .5s linear both
+}
+
+.flip-clock-wrapper ul.play li.flip-clock-active .down .shadow {
+    -webkit-animation: hide .5s .3s linear both;
+    -moz-animation: hide .5s .3s linear both;
+    animation: hide .5s .2s linear both
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+.owl-carousel,
+.owl-carousel .owl-item {
+    -webkit-tap-highlight-color: transparent;
+    position: relative
+}
+
+.owl-carousel {
+    display: none;
+    width: 100%;
+    z-index: 1
+}
+
+.owl-carousel .owl-stage {
+    position: relative;
+    -ms-touch-action: pan-Y;
+    -moz-backface-visibility: hidden
+}
+
+.owl-carousel .owl-stage:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0
+}
+
+.owl-carousel .owl-stage-outer {
+    position: relative;
+    overflow: hidden;
+    -webkit-transform: translate3d(0, 0, 0)
+}
+
+.owl-carousel .owl-item,
+.owl-carousel .owl-wrapper {
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0)
+}
+
+.owl-carousel .owl-wrapper {
+    -webkit-backface-visibility: hidden
+}
+
+.owl-carousel .owl-item {
+    min-height: 1px;
+    float: left;
+    -webkit-backface-visibility: hidden;
+    -webkit-touch-callout: none
+}
+
+.owl-carousel .owl-item img {
+    display: block;
+    width: 100%
+}
+
+.owl-carousel .owl-dots.disabled,
+.owl-carousel .owl-nav.disabled {
+    display: none
+}
+
+.no-js .owl-carousel,
+.owl-carousel.owl-loaded {
+    display: block
+}
+
+.owl-carousel .owl-dot,
+.owl-carousel .owl-nav .owl-next,
+.owl-carousel .owl-nav .owl-prev {
+    cursor: pointer;
+    cursor: hand;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.owl-carousel.owl-loading {
+    opacity: 0;
+    display: block
+}
+
+.owl-carousel.owl-hidden {
+    opacity: 0
+}
+
+.owl-carousel.owl-refresh .owl-item {
+    visibility: hidden
+}
+
+.owl-carousel.owl-drag .owl-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.owl-carousel.owl-grab {
+    cursor: move;
+    cursor: grab
+}
+
+.owl-carousel.owl-rtl {
+    direction: rtl
+}
+
+.owl-carousel.owl-rtl .owl-item {
+    float: right
+}
+
+.owl-carousel .animated {
+    animation-duration: 1s;
+    animation-fill-mode: both
+}
+
+.owl-carousel .owl-animated-in {
+    z-index: 0
+}
+
+.owl-carousel .owl-animated-out {
+    z-index: 1
+}
+
+.owl-carousel .fadeOut {
+    animation-name: fadeOut
+}
+
+.owl-height {
+    transition: height .5s ease-in-out
+}
+
+.owl-carousel .owl-item .owl-lazy {
+    opacity: 0;
+    transition: opacity .4s ease
+}
+
+.owl-carousel .owl-item img.owl-lazy {
+    transform-style: preserve-3d
+}
+
+.owl-carousel .owl-video-wrapper {
+    position: relative;
+    height: 100%;
+    background: #000
+}
+
+.owl-carousel .owl-video-play-icon {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    left: 50%;
+    top: 50%;
+    margin-left: -40px;
+    margin-top: -40px;
+    background: url(owl.video.play.png) no-repeat;
+    cursor: pointer;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    transition: transform .1s ease
+}
+
+.owl-carousel .owl-video-play-icon:hover {
+    -ms-transform: scale(1.3, 1.3);
+    transform: scale(1.3, 1.3)
+}
+
+.owl-carousel .owl-video-playing .owl-video-play-icon,
+.owl-carousel .owl-video-playing .owl-video-tn {
+    display: none
+}
+
+.owl-carousel .owl-video-tn {
+    opacity: 0;
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: opacity .4s ease
+}
+
+.owl-carousel .owl-video-frame {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%
+}
+
+.owl-theme .owl-dots,
+.owl-theme .owl-nav {
+    text-align: center;
+    -webkit-tap-highlight-color: transparent
+}
+
+.owl-theme .owl-nav {
+    margin-top: 10px
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+    color: #fff;
+    font-size: 14px;
+    margin: 5px;
+    padding: 4px 7px;
+    background: #d6d6d6;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px
+}
+
+.owl-theme .owl-nav [class*=owl-]:hover {
+    background: #869791;
+    color: #fff;
+    text-decoration: none
+}
+
+.owl-theme .owl-nav .disabled {
+    opacity: .5;
+    cursor: default
+}
+
+.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: 10px
+}
+
+.owl-theme .owl-dots .owl-dot {
+    display: inline-block;
+    zoom: 1
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    width: 10px;
+    height: 10px;
+    margin: 5px 7px;
+    background: #d6d6d6;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: opacity .2s ease;
+    border-radius: 30px
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background: #869791
+}

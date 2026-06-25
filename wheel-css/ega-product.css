@@ -1,0 +1,97 @@
+.ega-pro {
+    position: relative;
+}
+
+.ega-pro__content {
+    padding: 1rem;
+}
+
+@media (max-width: 767px) {
+    .ega-pro__content {
+        padding: .5rem;
+    }
+}
+
+.ega-pro__title {
+    margin-bottom: 0.5rem;
+    font-size: 1.17rem;
+}
+
+@media (max-width: 767px) {
+    .ega-pro__title {
+        font-size: .9rem;
+    }
+}
+
+.ega-pro__price-group {
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 767px) {
+    .ega-pro__price-group {
+        font-size: .9rem;
+    }
+}
+
+.ega-pro__price {
+    margin-right: 0.3rem;
+}
+
+.ega-pro__sale-tag.style1 {
+    position: absolute;
+    width: 80px;
+    text-align: center;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    background-color: #f4516c;
+    color: #ffffff;
+}
+
+.ega-pro__sale-tag.style1 .triangle {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+}
+
+.ega-pro__sale-tag.style1 .triangle:before,
+.ega-pro__sale-tag.style1 .triangle:after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    content: "";
+    top: 0;
+}
+
+.ega-pro__sale-tag.style1 .triangle--left {
+    z-index: 1;
+}
+
+.ega-pro__sale-tag.style1 .triangle--left:before {
+    top: 0;
+    left: 10px;
+    border-left: 80px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 30px solid transparent;
+}
+
+.ega-pro__sale-tag.style1 .triangle--left:after {
+    left: 0;
+    border-left: 80px solid #f4516c;
+    border-bottom: 20px solid transparent;
+}
+
+.ega-pro__sale-tag.style1 .triangle--right:before {
+    top: 10px;
+    left: 0;
+    border-right: 80px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 20px solid transparent;
+}
+
+.ega-pro__sale-tag.style1 .triangle--right:after {
+    left: 0;
+    border-right: 80px solid #f4516c;
+    border-bottom: 20px solid transparent;
+}

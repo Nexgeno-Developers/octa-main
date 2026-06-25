@@ -1,0 +1,100 @@
+@media (max-width: 991px) {
+  #xmas-006 .ega-home-banner {
+    flex-direction: column;
+  }
+  #xmas-006 .ega-home-banner #canvasContainer {
+    order: 0;
+  }
+  #xmas-006 .ega-home-banner .ega-order--1 {
+    order: 0;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-home-banner {
+    min-height: 100px;
+  }
+}
+@media (max-width: 1024px) {
+  #xmas-006 .ega-home-banner #countdown {
+    width: 620px;
+  }
+}
+@media (max-width: 991px) {
+  #xmas-006 .ega-home-banner #countdown {
+    bottom: 80px;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-home-banner #countdown {
+    width: 300px;
+    bottom: 0;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip {
+    width: 24px;
+    height: 40px;
+    margin: 2px;
+    float: none;
+    display: inline-block;
+    padding: 0;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip li {
+    line-height: 40px;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip li .up:after {
+    height: 1px;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip li .inn {
+    font-size: 20px;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip-clock-divider {
+    float: none;
+    display: inline-block;
+    height: 40px;
+    margin: 2px;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip-clock-divider .flip-clock-label {
+    display: none;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip-clock-divider .flip-clock-dot {
+    width: 5px;
+    height: 5px;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip-clock-divider .flip-clock-dot.top {
+    top: 10px;
+  }
+  #xmas-006 .ega-home-banner #countdown .flip-clock-divider .flip-clock-dot.bottom {
+    bottom: 10px;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-pro {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-pro__title {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-pro .ega-btn {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-section {
+    padding: 30px 10px;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-section .ega-row {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+}
+@media (max-width: 767px) {
+  #xmas-006 .ega-section .ega-row [class*=ega-col] {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
