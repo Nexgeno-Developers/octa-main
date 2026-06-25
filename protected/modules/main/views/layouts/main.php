@@ -186,7 +186,7 @@
         })(window, document, 'script', 'dataLayer', 'GTM-PM2PB72');</script>
     <!-- End Google Tag Manager -->
 
-    <?php $this->renderPartial('_clientTracking'); ?>
+    <?php $this->renderPartial('/layouts/_clientTracking'); ?>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-18HXYNFX81"></script>
 <script>
