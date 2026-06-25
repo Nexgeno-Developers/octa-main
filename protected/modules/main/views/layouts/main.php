@@ -401,7 +401,7 @@
     padding-top: 3px;
 }
 .bg_fig{
-background: url("/assets/baccc.webp") !important;
+background: url("<?php echo octa_asset('baccc.webp'); ?>") !important;
 background-repeat: no-repeat !important;
 background-size: 80% !important;
 background-position: right !important;
@@ -4492,7 +4492,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
               <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
                 <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"></path>
               </svg>
-              Subscribe Now<img src="/assets/arrow.png" <="" button="">
+              Subscribe Now<img src="<?php echo octa_asset('arrow.png'); ?>" <="" button="">
           </button></div>
         </div>
 
@@ -4612,20 +4612,20 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
         
         <div class="col-lg-6 col-md-6 col-sm-6 main_fot">
             <div class="main_fotp">
-                <img class="qr_img" src="/assets/qrcode.webp" alt="QR Code for Telegram">
+                <img class="qr_img" src="<?php echo octa_asset('qrcode.webp'); ?>" alt="QR Code for Telegram">
                 <div class="soc_div telejoin_col">
                     <a href="https://t.me/octanetworks">
-                        <p><img class="qrsoc_img" src="/assets/telegram (1) 1.png" alt="Telegram Icon">Join Now</p>
+                        <p><img class="qrsoc_img" src="<?php echo octa_asset('telegram (1) 1.png'); ?>" alt="Telegram Icon">Join Now</p>
                     </a>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 main_fot">
             <div class="main_fotp">
-                <img class="qr_img" src="/assets/Rectangle 18257 (2).png" alt="QR Code for WhatsApp">
+                <img class="qr_img" src="<?php echo octa_asset('Rectangle 18257 (2).png'); ?>" alt="QR Code for WhatsApp">
                 <div class="soc_div whatsapp_col">
                     <a href="https://chat.whatsapp.com/KtvTghoOEK2EvFsz5178L6">
-                        <p><img class="qrsoc_img" src="/assets/square-whatsapp 1.png" alt="WhatsApp Icon">Join Now</p>
+                        <p><img class="qrsoc_img" src="<?php echo octa_asset('square-whatsapp 1.png'); ?>" alt="WhatsApp Icon">Join Now</p>
                     </a>
                 </div>
             </div>

@@ -102,7 +102,7 @@
         
         <div class="bat_maidiv">
         <div class="button_exp mt-2">
-                 <a class="enquire" data-toggle="modal" data-target="#enroll_popup">Contact Us Now <img src="/assets/arrnew.webp" alt="Cisco"></a>  
+                 <a class="enquire" data-toggle="modal" data-target="#enroll_popup">Contact Us Now <img src="<?php echo octa_asset('arrnew.webp'); ?>" alt="Cisco"></a>  
             </div>
             </div>
       </div>
@@ -166,7 +166,7 @@
             </div>
           </div>
           <div class="center-logo">
-            <img src="/assets/first.webp" alt="logo" />
+            <img src="<?php echo octa_asset('first.webp'); ?>" alt="logo" />
           </div>
         </div>
         </div>
@@ -222,7 +222,7 @@
          
         <div class="bat_maidiv">
         <div class="button_exp mt-2">
-                 <a class="enquire" data-toggle="modal" data-target="#new_popup">Reach Out for Assistance <img src="/assets/arrnew.webp" alt="Cisco"></a>
+                 <a class="enquire" data-toggle="modal" data-target="#new_popup">Reach Out for Assistance <img src="<?php echo octa_asset('arrnew.webp'); ?>" alt="Cisco"></a>
             </div>
             </div>
       </div>
@@ -273,7 +273,7 @@
         
         <div class="bat_maidiv">
         <div class="button_exp mt-2">
-                 <a class="enquire" data-toggle="modal" data-target="#ccie_popup">Ask for a Free Consultation <img src="/assets/arrnew.webp" alt="Cisco"></a>
+                 <a class="enquire" data-toggle="modal" data-target="#ccie_popup">Ask for a Free Consultation <img src="<?php echo octa_asset('arrnew.webp'); ?>" alt="Cisco"></a>
             </div>
             </div>
       </div>
@@ -357,8 +357,8 @@
                             <div><?=$testimonials->content?></div>
                         </div>
                         <div class="rating">
-                            <img src="/assets/g-image.webp" alt="Google" class="rating-icon">
-                            <img src="/assets/starreview.webp" alt="Google" class="r-star">
+                            <img src="<?php echo octa_asset('g-image.webp'); ?>" alt="Google" class="rating-icon">
+                            <img src="<?php echo octa_asset('starreview.webp'); ?>" alt="Google" class="r-star">
                             <span>4.9</span>
                         </div>
                     </div>
@@ -398,7 +398,7 @@
              <div class="col-lg-1 col-md- col-sm-12 col-xs-12">
                  <a class="right carousel-control" href="#myCarousel1" data-slide="next">
                  <div class="vid_arrow">
-                 <img src="/assets/arrnew.webp" alt="Next">
+                 <img src="<?php echo octa_asset('arrnew.webp'); ?>" alt="Next">
                   </a>
                   </div>
              </div>
@@ -407,7 +407,7 @@
                    <p class="create_p">Don't just take our word for it – listen to the professionals who've transformed their careers with Octa Networks.</p>
              <div class="vid_maidiv">
             <div class="button_exp mt-4">
-                 <a href="https://updated.octanetworks.com/student-reviews" target="_blank">Explore <img src="/assets/arrnew.webp" alt="Cisco"></a>
+                 <a href="https://updated.octanetworks.com/student-reviews" target="_blank">Explore <img src="<?php echo octa_asset('arrnew.webp'); ?>" alt="Cisco"></a>
             </div>
             </div>
              </div>
@@ -860,7 +860,7 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
             </div>
           </div>
           <div class="center-logo">
-            <img src="/assets/first.webp" alt="logo" />
+            <img src="<?php echo octa_asset('first.webp'); ?>" alt="logo" />
           </div>
         </div>
         </div>
@@ -908,7 +908,7 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
             </div>
           </div>
           <div class="center-logo">
-            <img src="/assets/thirdd.webp" alt="logo" />
+            <img src="<?php echo octa_asset('thirdd.webp'); ?>" alt="logo" />
           </div>
         </div>
         </div>
@@ -1058,7 +1058,7 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
                         </div>
                         <div class="fo_rmbutton">
                         <div class="form-group form-row button_formexp1 fo_rmbut"> 
-                           <button type="submit" title="Submit">Submit <img src="/assets/arrnew.webp" alt="arrow image"></button>
+                           <button type="submit" title="Submit">Submit <img src="<?php echo octa_asset('arrnew.webp'); ?>" alt="arrow image"></button>
                         </div>
                         </div>
                      </form>
@@ -1381,7 +1381,7 @@ $('.marquee').marquee({
             // autoplayHoverPause: true,    // Pause on hover
             navText: [
                 '<img src="" alt="Previous">',
-                '<img src="/assets/arrnew.webp" alt="Next">'
+                '<img src="<?php echo octa_asset('arrnew.webp'); ?>" alt="Next">'
             ],
             responsive: {
     0: {         // Mobile (portrait)

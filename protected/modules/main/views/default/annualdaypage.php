@@ -644,11 +644,11 @@ p.view-all-link {
             <p class="text-center">Biggest CCIE sale of 2024. You won’t find this deal anywhere else. Guaranteed</p>
             <div class="workshop-card">
                 <span>
-        <img src="/assets/calendericon.webp" alt="Clock" />
+        <img src="<?php echo octa_asset('calendericon.webp'); ?>" alt="Clock" />
         <strong>Only Valid Till 25 December 2024</strong> 
       </span>
       <span>
-        <img src="/assets/car-seats.png" alt="Clock" />
+        <img src="<?php echo octa_asset('car-seats.png'); ?>" alt="Clock" />
         <strong>Limited Seats Available</strong> 
       </span>
    
@@ -711,7 +711,7 @@ p.view-all-link {
     <section class="whatsec">
         <div class="whatsecdiv">
             <div class="container">
-            <img src="/assets/IMG_20241130_164530_363.gif" alt="Offer Image" class="offer-image">
+            <img src="<?php echo octa_asset('IMG_20241130_164530_363.gif'); ?>" alt="Offer Image" class="offer-image">
             <p>But wait.... Why are we giving this massive offer?</p>
             <p>It's because this is our flagship offer which comes only once a year.</p>
 
@@ -842,17 +842,17 @@ p.view-all-link {
     <div class="container">
         <h6>Happy Students</h6>
         <div id="happyStudentsCarousel" class="owl-carousel owl-theme">
-            <div class="item"><img src="/assets/ent2.png" alt="Student 11"></div>
-            <div class="item"><img src="/assets/ent3.png" alt="Student 11"></div>
-            <div class="item"><img src="/assets/student19.png" alt="Student 11"></div>
-            <div class="item"><img src="/assets/student21.png" alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS1.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS2.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS3.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS4.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS5.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS6.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS7.png"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('ent2.png'); ?>" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('ent3.png'); ?>" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('student19.png'); ?>" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('student21.png'); ?>" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS1.png'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS2.png'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS3.png'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS4.png'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS5.png'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS6.png'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS7.png'); ?>"alt="Student 11"></div>
         </div>
     </div>
 </section>
@@ -863,21 +863,21 @@ p.view-all-link {
             <h5>Let The Numbers Talk</h5>
             <div class="col">
                 <div class="countdiv">
-                <img src="/assets/Rectangle-4838-1_1Rectangle-4838-1.webp" alt="" class="countimg">
+                <img src="<?php echo octa_asset('Rectangle-4838-1_1Rectangle-4838-1.webp'); ?>" alt="" class="countimg">
                 <p class="countnumber">150K+</p>
                 <p class="counttext">Learners</p>
                 </div>
             </div>
             <div class="col">
                 <div class="countdiv">
-                <img src="/assets/followers.png" alt="" class="countimg">
+                <img src="<?php echo octa_asset('followers.png'); ?>" alt="" class="countimg">
                 <p class="countnumber">40K+</p>
                 <p class="counttext">Followes</p>
                 </div>
             </div>
             <div class="col">
                 <div class="countdiv">
-                <img src="/assets/rev.webp" alt="" class="countimg">
+                <img src="<?php echo octa_asset('rev.webp'); ?>" alt="" class="countimg">
                 <p class="countnumber">4.8/5</p>
                 <p class="counttext">Rating</p>
                 </div>
@@ -970,8 +970,8 @@ setInterval(updateCountdown, 1000);
             autoplayTimeout: 3000,        // Time between slides (in milliseconds)
             autoplayHoverPause: true,     // Pause on hover
             navText: [
-                '<img src="/assets/leftarrow.png" alt="Previous">',
-                '<img src="/assets/rightarrow.png" alt="Next">'
+                '<img src="<?php echo octa_asset('leftarrow.png'); ?>" alt="Previous">',
+                '<img src="<?php echo octa_asset('rightarrow.png'); ?>" alt="Next">'
             ],
             responsive: {
                 0: {

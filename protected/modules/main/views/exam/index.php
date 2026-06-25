@@ -1350,7 +1350,7 @@ if(!empty($exam->h1_description)){ ?>
                   </div>
                   <div class="cour_button">
                   <div class="buttonenq_exp mt-2">
-                      <a class="cour_enbutton" data-toggle="modal" data-target="#enroll_popup">Enquire Now <img src="/assets/arrow.png"></a>
+                      <a class="cour_enbutton" data-toggle="modal" data-target="#enroll_popup">Enquire Now <img src="<?php echo octa_asset('arrow.png'); ?>"></a>
                   </div>
                   <!--<a class="downbroch_button" data-toggle="modal" data-target="#myModalSubscribe1">Download Brochure</a> -->
                   </div>
@@ -1523,7 +1523,7 @@ if(!empty($exam->h1_description)){ ?>
                         </div>
                         <div class="fo_rmbutton">
                         <div class="form-group form-row button_formexp1 fo_rmbut"> 
-                           <button type="submit" title="Submit">Submit <img src="/assets/arrow.png"></button>
+                           <button type="submit" title="Submit">Submit <img src="<?php echo octa_asset('arrow.png'); ?>"></button>
                         </div>
                         </div>
                      </form>
@@ -2283,8 +2283,8 @@ if(!empty($exam->h1_description)){ ?>
                             <div><?=$testimonials->content?></div>
                         </div>
                         <div class="rating">
-                            <img src="/assets/9baefbe8f8feffab0fe67682e140e1b1 (1).png" alt="Google" class="rating-icon">
-                            <img src="/assets/d1df2bdcd3392134fdf459a8961b6ee6 (1).png" alt="Google" class="r-star">
+                            <img src="<?php echo octa_asset('9baefbe8f8feffab0fe67682e140e1b1 (1).png'); ?>" alt="Google" class="rating-icon">
+                            <img src="<?php echo octa_asset('d1df2bdcd3392134fdf459a8961b6ee6 (1).png'); ?>" alt="Google" class="r-star">
                             <span>4.9</span>
                         </div>
                     </div>
@@ -3033,7 +3033,7 @@ if(!empty($exam->h1_description)){ ?>
             // autoplayHoverPause: true,    // Pause on hover
             navText: [
                 '<img src="" alt="Previous">',
-                '<img src="/assets/next_icon.png" alt="Next">'
+                '<img src="<?php echo octa_asset('next_icon.png'); ?>" alt="Next">'
             ],
             responsive: {
     0: {         // Mobile (portrait)

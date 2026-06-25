@@ -6613,7 +6613,7 @@ img.oneplusoneimg {
     padding-top: 3px;
 }
 .bg_fig{
-background: url("/assets/baccc.webp") !important;
+background: url("../assets/baccc.webp") !important;
 background-repeat: no-repeat !important;
 background-size: 80% !important;
 background-position: right !important;

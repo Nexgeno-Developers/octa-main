@@ -2253,7 +2253,7 @@ figure.snip0056{width: 100% !important;}
             <div class="col-xs-12 col-md-12">
                 <div class="secbandiv">
                     <div class="booktitle">
-            <img src="/assets/bookjn.webp" alt="Book Icon" class="icon-img me-3">
+            <img src="<?php echo octa_asset('bookjn.webp'); ?>" alt="Book Icon" class="icon-img me-3">
             <h5 class="botitle">Online<br> Training</h5>
           </div>
           <p>The JNCIE (Juniper Networks Certified Internet Expert) certification is one of the most prestigious and sought-after credentials in the networking industry.</p>
@@ -2432,7 +2432,7 @@ figure.snip0056{width: 100% !important;}
       <h2>FREE JNCIE - SP Training</h2>
       <a href="https://chat.whatsapp.com/JfYrR6V2WigDiuRllhg19c" style="text-decoration: none;">
     <span style="font-size: 20px; font-weight: bold; color: green; margin-right: 10px;">Join Group</span>
-    <img src="/assets/whatsap.webp" alt="whatsapp">
+    <img src="<?php echo octa_asset('whatsap.webp'); ?>" alt="whatsapp">
 </a>
     </div>
     <p>Learn JNCIE - SP for $0
@@ -2516,7 +2516,7 @@ Take this chance to secure a brighter future with one of the most recognized cer
     <div class="faq-header">
       <span class="icon">+</span>
       <h2>FREE JNCIE - ENT Training</h2>
-      <a href="https://chat.whatsapp.com/Kn81xpf1s1O5Yebjicv5ne"><span style="font-size: 20px; font-weight: bold; color: green; margin-right: 10px;">Join Group</span><img src="/assets/whatsap.webp" alt="whatsapp"></a>
+      <a href="https://chat.whatsapp.com/Kn81xpf1s1O5Yebjicv5ne"><span style="font-size: 20px; font-weight: bold; color: green; margin-right: 10px;">Join Group</span><img src="<?php echo octa_asset('whatsap.webp'); ?>" alt="whatsapp"></a>
     </div>
     <p>Learn  JNCIE - ENT for $0
 Supercharge your career with our FREE JNCIE-ENT Training!
@@ -2591,7 +2591,7 @@ Whether you’re looking to grow within your current role or open doors to excit
     <div class="faq-header">
       <span class="icon">+</span>
       <h2>FREE JNCIE - SEC Training</h2>
-      <a href="https://chat.whatsapp.com/Chl8j6JON8y00tKZQn43VG"><span style="font-size: 20px; font-weight: bold; color: green; margin-right: 10px;">Join Group</span><img src="/assets/whatsap.webp" alt="whatsapp"></a>
+      <a href="https://chat.whatsapp.com/Chl8j6JON8y00tKZQn43VG"><span style="font-size: 20px; font-weight: bold; color: green; margin-right: 10px;">Join Group</span><img src="<?php echo octa_asset('whatsap.webp'); ?>" alt="whatsapp"></a>
     </div>
     <p>Learn JNCIE - SEC for $0
 Step into the growing field of cybersecurity with our FREE JNCIE-SEC Training!
@@ -2650,7 +2650,7 @@ This credential opens doors to high-paying roles, leadership opportunities, and 
     <div class="faq-header">
       <span class="icon">+</span>
       <h2>FREE JNCIE - DC Training</h2>
-      <a href="https://chat.whatsapp.com/BfoCx72SgJ101ORE5EBwsv"><span style="font-size: 20px; font-weight: bold; color: green; margin-right: 10px;">Join Group</span><img src="/assets/whatsap.webp" alt="whatsapp"></a>
+      <a href="https://chat.whatsapp.com/BfoCx72SgJ101ORE5EBwsv"><span style="font-size: 20px; font-weight: bold; color: green; margin-right: 10px;">Join Group</span><img src="<?php echo octa_asset('whatsap.webp'); ?>" alt="whatsapp"></a>
     </div>
     <p>Learn JNCIE - DC  for $0
 In today’s digital landscape, data centers are the backbone of IT infrastructure, and professionals with advanced data center expertise are in high demand.
@@ -2736,17 +2736,17 @@ The JNCIE-DC certification positions you as an elite professional capable of des
     <div class="container">
         <h6>Happy Students</h6>
         <div id="happyStudentsCarousel" class="owl-carousel owl-theme">
-            <div class="item"><img src="/assets/Jncie1.webp" alt="Student 11"></div>
-            <!--<div class="item"><img src="/assets/Jncie2.webp" alt="Student 11"></div>-->
-            <div class="item"><img src="/assets/Jncie3.webp" alt="Student 11"></div>
-            <!--<div class="item"><img src="/assets/Jncie4.webp" alt="Student 11"></div>-->
-            <div class="item"><img src="/assets/Jncie5.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie6.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie7.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie8.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie9.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS6.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS7.png"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('Jncie1.webp'); ?>" alt="Student 11"></div>
+            <!--<div class="item"><img src="<?php echo octa_asset('Jncie2.webp'); ?>" alt="Student 11"></div>-->
+            <div class="item"><img src="<?php echo octa_asset('Jncie3.webp'); ?>" alt="Student 11"></div>
+            <!--<div class="item"><img src="<?php echo octa_asset('Jncie4.webp'); ?>" alt="Student 11"></div>-->
+            <div class="item"><img src="<?php echo octa_asset('Jncie5.webp'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('Jncie6.webp'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('Jncie7.webp'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('Jncie8.webp'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('Jncie9.webp'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS6.png'); ?>"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo octa_asset('SS7.png'); ?>"alt="Student 11"></div>
         </div>
     </div>
 </section>
@@ -3109,8 +3109,8 @@ if($segments[1] == "ccie-security_v6.1_training"){
             autoplayTimeout: 3000,        // Time between slides (in milliseconds)
             autoplayHoverPause: true,     // Pause on hover
             navText: [
-                '<img src="/assets/leftarrow.png" alt="Previous">',
-                '<img src="/assets/rightarrow.png" alt="Next">'
+                '<img src="<?php echo octa_asset('leftarrow.png'); ?>" alt="Previous">',
+                '<img src="<?php echo octa_asset('rightarrow.png'); ?>" alt="Next">'
             ],
             responsive: {
                 0: {
