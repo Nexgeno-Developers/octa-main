@@ -169,7 +169,7 @@ return array(
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-			'errorAction' => 'main/default/error',
+			'errorAction' => 'main/default',
 		),
 
 		'log'=>array(
