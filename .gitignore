@@ -1,11 +1,5 @@
 .env
 
-/bootstrap/compiled.php
-
-.env.*.php
-
-.env.php
-
 *.zip
 
 *.log
@@ -14,41 +8,7 @@
 
 *.sql
 
-!cms2/sql/
-
-!cms2/sql/rbac_admin_role.sql
-
-/includes/config/secrets.local.php
-
-/oauth/callback/*.txt
-
-/oauth/callback/.zoho_refresh_token
-
-/oauth/callback/zoho_refresh_token
-
-/oauth/callback/error_log
-
 /error_log
-
-
-
-!uploads
-
-uploads/*
-
-
-
-!images
-
-images/*
-
-
-
-!/images/custom/
-
-!/images/custom/*
-
-
 
 1blog
 
@@ -56,19 +16,11 @@ images/*
 
 /includes/config/config.php
 
-
-
 cgi-bin
 
 vendor
 
-
-
 **/sitemap.xml
-
-**/config.php
-
-
 
 /cisco
 
