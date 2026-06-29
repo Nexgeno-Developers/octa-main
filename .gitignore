@@ -82,19 +82,9 @@ vendor
 
 /protected/config/secrets.local.php
 
-/lib/protected/config/secrets.local.php
-
-/lib/protected/config/database.php
-
-/lib/protected/config/database_blog.php
-
-/lib/protected/config/main.php
-
 /customfiles/test.php
 
 /customfiles_old/
-
-/lib/protected/
 
 /protected/main.php
 
