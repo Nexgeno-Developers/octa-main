@@ -188,12 +188,12 @@ if (!empty($content->photo2)) {
                                                                 <label>Method <span>*</span></label>
 
                                                                 <div class="methods">
-                                                                    <?/*<label>	<input class="pay_by" type="radio" name="method" value="netbanking"/> Netbanking</label>*/ ?>
+                                                                    <!-- <label>	<input class="pay_by" type="radio" name="method" value="netbanking"/> Netbanking</label> -->
                                                                     <label class="d_flexs"><input class="pay_by"
                                                                             type="radio" name="method" value="card"
                                                                             checked required /> <span>Credit/Debit
                                                                             Card</span></label>
-                                                                    <?/*<label><input class="pay_by" type="radio" name="method" value="upi"/> UPI</label>*/ ?>
+                                                                    <!-- <label><input class="pay_by" type="radio" name="method" value="upi"/> UPI</label> -->
                                                                 </div>
                                                             </div>
                                                         </div>
