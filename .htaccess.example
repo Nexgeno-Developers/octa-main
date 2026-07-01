@@ -1,0 +1,25 @@
+# Copy this file to .htaccess on the server (or merge the rewrite block into your live .htaccess).
+# CRITICAL: Do NOT add "RewriteCond %{HTTPS} off" — that breaks all inner pages on HTTPS.
+
+RewriteOptions inherit
+RewriteEngine on
+
+ErrorDocument 404 /index.php
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# forward everything else to Yii (HTTP and HTTPS)
+RewriteCond %{REQUEST_URI} !^/register/
+RewriteCond %{QUERY_STRING} !^/register/
+RewriteCond %{REQUEST_URI} !^/update/
+RewriteCond %{QUERY_STRING} !^/update/
+RewriteCond %{REQUEST_URI} !^/packages/
+RewriteCond %{QUERY_STRING} !^/packages/
+RewriteCond %{REQUEST_URI} !^/upgrade/
+RewriteCond %{QUERY_STRING} !^/upgrade/
+RewriteCond %{REQUEST_URI} !^/\.well-known/cpanel-dcv/[0-9a-zA-Z_-]+$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/(?:\ Ballot169)?
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^ index.php [L]

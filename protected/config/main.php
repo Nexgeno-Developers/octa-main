@@ -11,7 +11,7 @@ $secrets = octa_load_secrets();
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'OctaNetworks',
-        'defaultController'=>'main',
+        'defaultController'=>'main/default',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -169,7 +169,7 @@ return array(
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-			'errorAction' => 'main/default',
+			'errorAction' => 'main/default/error',
 		),
 
 		'log'=>array(
