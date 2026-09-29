@@ -83,12 +83,8 @@ class DefaultController extends CController {
         $cri5->order="orders asc";
 				$slider = SliderPost::model()->findAll($cri5);  
 				
-				$blogs = array();
-				try {
-					$blogs = Yii::app()->db_blog->createCommand()->select('p.*')->from('wp_posts p')->where('p.post_status = "publish" AND p.post_type = "post" ')->order('p.post_date DESC')->limit(3)->queryAll();
-				} catch (Exception $e) {
-					Yii::log('Blog DB unavailable: '.$e->getMessage(), CLogger::LEVEL_WARNING, 'application.blog');
-				}
+				//$blogs = Yii::app()->db_blog->createCommand()->select('p.*, pm.meta_value')->from('wp_posts p')->join('wp_postmeta pm','p.ID = pm.post_id')->where('p.post_status = "publish" AND p.post_type = "post" AND  pm.meta_key = "_thumbnail_id"')->order('post_date DESC')->limit(3)->queryAll();
+				$blogs = Yii::app()->db_blog->createCommand()->select('p.*')->from('wp_posts p')->where('p.post_status = "publish" AND p.post_type = "post" ')->order('p.post_date DESC')->limit(3)->queryAll();
 				
 				
 		//var_dump($blogs);

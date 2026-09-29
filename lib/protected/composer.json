@@ -1,0 +1,27 @@
+{
+    "name": "octa/yii-app",
+    "description": "Yii Framework project with additional libraries",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.5",
+        "phpoffice/phpexcel": "^1.8",
+        "ralouphie/getallheaders": "^3.0",
+        "razorpay/razorpay": "^2.0",
+        "sendinblue/api-v3-sdk": "^7.4",
+        "symfony/polyfill-mbstring": "^1.27",
+        "phpoffice/phpspreadsheet": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "protected/"
+        }
+    },
+    "config": {
+        "platform-check": false,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

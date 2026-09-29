@@ -1,7 +1,7 @@
 <?php
 require_once Yii::getPathOfAlias('webroot').'/customfiles/mailfunctions.php';
 
-require_once Yii::getPathOfAlias('application') . '/vendor/autoload.php';
+require '/home2/octanetw/public_html/protected/vendor/autoload.php';
 
 
 class ExamController extends CController

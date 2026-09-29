@@ -718,7 +718,7 @@ img.key_icn {
 						<div class="form-group form-row">
 							<input type="tel" id="mobile-number5" name="phone" placeholder="+91"> </div>
 						<div class="form-group form-row">
-							<div class="g-recaptcha" data-sitekey="<?= Yii::app()->params['siteKey'] ?>"></div>
+							<div class="g-recaptcha" data-sitekey="6Lf_bgEVAAAAAPWNPY4ZSDn_DTQvzxPty4VjaRaS"></div>
 							<input type="hidden" name="type" value="Request your Trial class" /> </div>
 						<div class="form-group form-row pointer_none">
 							<input type="checkbox" class="subscribe_approval" name="subscribe_approval" value="1" checked="checked">&nbsp;&nbsp;Subscribe to our Newsletter.

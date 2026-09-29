@@ -188,12 +188,12 @@ if (!empty($content->photo2)) {
                                                                 <label>Method <span>*</span></label>
 
                                                                 <div class="methods">
-                                                                    <!-- <label>	<input class="pay_by" type="radio" name="method" value="netbanking"/> Netbanking</label> -->
+                                                                    <?/*<label>	<input class="pay_by" type="radio" name="method" value="netbanking"/> Netbanking</label>*/ ?>
                                                                     <label class="d_flexs"><input class="pay_by"
                                                                             type="radio" name="method" value="card"
                                                                             checked required /> <span>Credit/Debit
                                                                             Card</span></label>
-                                                                    <!-- <label><input class="pay_by" type="radio" name="method" value="upi"/> UPI</label> -->
+                                                                    <?/*<label><input class="pay_by" type="radio" name="method" value="upi"/> UPI</label>*/ ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -330,7 +330,7 @@ if (!empty($content->photo2)) {
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    
+(function ($) {    
     $('#currency').change(function () {
         var currency = this.value;
         if (currency == 'INR') {
@@ -364,7 +364,7 @@ if (!empty($content->photo2)) {
             var method = "card";
         }
         var options = {
-            "key": "<?php echo Yii::app()->params['razorpayKeyId']; ?>",
+            "key": "<?php echo CHtml::encode(Yii::app()->params['razorpayKeyId']); ?>",
             "amount": UserData.amount,
             "currency": UserData.currency,
             "name": UserData.name,
@@ -443,6 +443,7 @@ if (!empty($content->photo2)) {
             data: new FormData(formEl),
             processData: false,
             contentType: false,
+            dataType: "json",
             success: function(response) {
                 // console.log(response); // Debug: Log response to check its structure
                 if (response.status && response.html) {
@@ -564,7 +565,7 @@ if (!empty($content->photo2)) {
                 var method = "card";
             }
             var options = {
-                "key": "<?php echo Yii::app()->params['razorpayKeyId']; ?>",
+                "key": "<?php echo CHtml::encode(Yii::app()->params['razorpayKeyId']); ?>",
                 "amount": UserData.amount,
                 "currency": UserData.currency,
                 "name": UserData.name,
@@ -621,6 +622,7 @@ if (!empty($content->photo2)) {
             e.preventDefault();
         }
     }, 1500);*/
+})(jQuery);
 </script>
 
 

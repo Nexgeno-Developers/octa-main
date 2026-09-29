@@ -1,6 +1,7 @@
 <?php
 
 require_once Yii::getPathOfAlias('webroot') . '/customfiles/mailfunctions.php';
+require_once Yii::getPathOfAlias('webroot') . '/protected/config/load-secrets.php';
 
 class FormsController extends CController {
 	public $pageDescription;
@@ -367,8 +368,16 @@ class FormsController extends CController {
 													$model->save(); 
 											} 
 											
-											$mc = addToMailchimp($spram[2], $spram[1], "", $spram[3]);
-										}
+								// 			$mc = addToMailchimp($spram[2], $spram[1], "", $spram[3]);
+											$zoho = addToZoho(
+                                                $spram[2], // email
+                                                $spram[1], // name
+                                                $spram[3], // phone
+                                                isset($spram[4]) ? $spram[4] : '', // course
+                                                '', // message
+                                                'Get Touch Form'
+                                            );
+							            }
 
 
                     if ($spram[1] != "" AND $spram[2] != "" AND $spram[3] != "") {

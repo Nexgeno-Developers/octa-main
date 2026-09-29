@@ -49,7 +49,7 @@ if(Yii::app()->user->getstate("id") != ""){
 					<font color="red">minimum 6 characters required</font>
 					<input type="hidden" name="rurl" value="<?=$rurl?>" />
                     <input type="password" name="cpassword" class="user-form" placeholder="Confirm Password" pattern=".{6,}"  required="required" />
-                    <div class="g-recaptcha" data-sitekey="<?= Yii::app()->params['siteKey'] ?>"></div>
+                    <div class="g-recaptcha" data-sitekey="6LeXhJoUAAAAAJhHqAH6GbKwlD7eHFHDio7I2fNs"></div>
                     <div style="padding: 10px 0px; color:#85B034;"><input type="checkbox" name="subscribe"> &nbsp; <strong>Subscribe Newsletter</strong></div>
 					<input type="submit" name="Login2" value="Register" class="login loginmodal-submit" value="Register">
                                         

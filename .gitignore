@@ -20,6 +20,8 @@ cgi-bin
 
 protected/vendor
 
+lib/protected/vendor
+
 **/sitemap.xml
 
 /cisco

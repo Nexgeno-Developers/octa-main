@@ -1,24 +1,30 @@
 <?php
 // Use Composer-installed PHPMailer
 require_once __DIR__ . '/vendor/autoload.php';
-require_once dirname(__DIR__) . '/protected/config/load-secrets.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-$octaSecrets = octa_load_secrets();
+//$today=date("Y-m-d");
 $myToday = date("Y-m-d");
 
+require_once dirname(__DIR__) . '/protected/config/load-secrets.php';
+$octaSecrets = octa_load_secrets();
+
 $GLOBALS["host"] = $octaSecrets['mailHost'];
-$GLOBALS["port"] = $octaSecrets['mailPort'];
+$GLOBALS["port"] = (int) $octaSecrets['mailPort'];
 $GLOBALS["username"] = $octaSecrets['mailUsername'];
 $GLOBALS["username1"] = $octaSecrets['mailUsernameAlt'];
 $GLOBALS["password"] = $octaSecrets['mailPassword'];
 $GLOBALS["mydate"] = date("Y-m-d");
+$GLOBALS["brevoApiKey"] = $octaSecrets['brevoApiKey'];
+$GLOBALS["mailchimpApiKey"] = $octaSecrets['mailchimpApiKey'];
+$GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
+
+
+////////////////////////////////////////////
 
     function create_contact_sendblue($emailid)
     {
-        $octaSecrets = octa_load_secrets();
         $curl = curl_init();
         
         curl_setopt_array($curl, array(
@@ -47,7 +53,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
           CURLOPT_HTTPHEADER => array(
             'Accept: application/json',
             'Content-Type: application/json',
-            'api-key: ' . $octaSecrets['brevoApiKey']
+            'api-key: ' . $GLOBALS['brevoApiKey']
           ),
         ));
         
@@ -76,7 +82,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -109,7 +115,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -142,7 +148,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -175,7 +181,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -208,7 +214,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -281,7 +287,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -315,7 +321,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -349,7 +355,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -382,7 +388,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -416,7 +422,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -449,7 +455,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -483,7 +489,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -517,7 +523,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -550,7 +556,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -583,7 +589,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -616,7 +622,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -649,7 +655,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -682,7 +688,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -715,7 +721,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -749,7 +755,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -783,7 +789,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -836,7 +842,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -855,7 +861,8 @@ $GLOBALS["mydate"] = date("Y-m-d");
 	    $time = time();
 	    $pdf = $spram[3];
 	    $pdf .= '<br>';
-	    $pdf .= "<a href='https://octanetworks.com/upload_brochure/$spram[4]?$time'>https://octanetworks.com/upload_brochure/$spram[4]</a>";
+	    $brochureBase = octa_base_url();
+	    $pdf .= "<a href='".$brochureBase."/upload_brochure/$spram[4]?$time'>".$brochureBase."/upload_brochure/$spram[4]</a>";
 		
 		$farr	=	array("[DATE]","[NAME]","[EMAIL]","[MESSAGE]","[PHONE]","[WHATSAPP]");
 		$aarr	=	array($GLOBALS["mydate"],$spram[0],$spram[1],$pdf,$spram[2],$spram[6]);
@@ -875,7 +882,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -908,7 +915,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -943,7 +950,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -977,7 +984,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -1010,7 +1017,7 @@ $GLOBALS["mydate"] = date("Y-m-d");
         $mail->Username   = $GLOBALS["username"];
         $mail->Password   = $GLOBALS["password"];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $GLOBALS["port"];
         
         $mail->setFrom($from, 'OctaNetworks');
         $mail->addAddress($to);
@@ -1027,10 +1034,9 @@ $GLOBALS["mydate"] = date("Y-m-d");
     function addToMailchimp($email = "", $firstName = "", $lastName = "", $phone = "") {
         
         try {
-            $octaSecrets = octa_load_secrets();
-            $apiKey = $octaSecrets['mailchimpApiKey'];
-            $listId = $octaSecrets['mailchimpListId'];
-            $dc     = substr($apiKey, strpos($apiKey, '-') + 1);
+            $apiKey = $GLOBALS["mailchimpApiKey"];
+            $listId = $GLOBALS["mailchimpListId"];
+            $dc     = substr($apiKey, strpos($apiKey, '-') + 1); // auto extract dc from API key
         
             // Prepare URL
             $emailHash = md5(strtolower($email));
@@ -1072,5 +1078,113 @@ $GLOBALS["mydate"] = date("Y-m-d");
         }    
     }
 	
+	function addToZoho($email = '', $name = '', $phone = '', $course = '', $message = '', $source = 'Octa Website') {
+        try {
+            $config = octa_load_secrets();
+    
+            // Get Zoho access token
+            $tokenUrl = rtrim($config['zohoAccountsBase'], '/') . '/oauth/v2/token';
+    
+            $ch = curl_init($tokenUrl);
+    
+            curl_setopt_array($ch, array(
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => http_build_query(array(
+                    'grant_type' => 'refresh_token',
+                    'client_id' => $config['zohoClientId'],
+                    'client_secret' => $config['zohoClientSecret'],
+                    'refresh_token' => $config['zohoRefreshToken']
+                )),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/x-www-form-urlencoded'
+                ),
+                CURLOPT_TIMEOUT => 20
+            ));
+    
+            $tokenBody = curl_exec($ch);
+            $tokenCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+    
+            $tokenData = json_decode($tokenBody, true);
+    
+            if ($tokenCode !== 200 || empty($tokenData['access_token'])) {
+               error_log(
+                    'Zoho token error. HTTP ' . $tokenCode,
+                    CLogger::LEVEL_ERROR
+                );
+                return false;
+            }
+    
+            // Prepare contact fields
+            $contactInfo = array(
+                'First Name' => $name,
+                'Contact Email' => $email,
+                'Phone' => $phone,
+                'Course' => $course,
+                'Message' => $message
+            );
+    
+            foreach ($contactInfo as $key => $value) {
+                if ($value === '' || $value === null) {
+                    unset($contactInfo[$key]);
+                }
+            }
+    
+            // Subscribe contact to Zoho Campaigns list
+            $subscribeUrl = rtrim($config['zohoCampaignsBase'], '/') . '/api/v1.1/json/listsubscribe';
+    
+            $ch = curl_init($subscribeUrl);
+    
+            curl_setopt_array($ch, array(
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => http_build_query(array(
+                    'resfmt' => 'JSON',
+                    'listkey' => $config['zohoListKey'],
+                    'contactinfo' => json_encode($contactInfo),
+                    'source' => $source
+                )),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Zoho-oauthtoken ' .
+                        $tokenData['access_token'],
+                    'Content-Type: application/x-www-form-urlencoded'
+                ),
+                CURLOPT_TIMEOUT => 20
+            ));
+    
+            $responseBody = curl_exec($ch);
+            $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+    
+            $response = json_decode($responseBody, true);
+    
+            if ($responseCode < 200 || $responseCode >= 300) {
+               error_log(
+                    'Zoho subscribe error. HTTP ' . $responseCode,
+                    CLogger::LEVEL_ERROR
+                );
+                return false;
+            }
+    
+            if (isset($response['status']) &&
+                strtolower($response['status']) === 'error') {
+               error_log(
+                    'Zoho rejected contact',
+                    CLogger::LEVEL_ERROR
+                );
+                return false;
+            }
+    
+            return true;
+    
+        } catch (Exception $e) {
+           error_log(
+                'Zoho exception: ' . $e->getMessage(),
+                CLogger::LEVEL_ERROR
+            );
+            return false;
+        }
+    }
 
 ?>

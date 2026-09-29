@@ -175,7 +175,7 @@
         gtag('event', 'conversion', { 'send_to': 'AW-760627314/esGeCPz8sbMBEPKA2eoC' });
     </script>
 
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({n
                 'gtm.start':
@@ -184,9 +184,46 @@
                 j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-PM2PB72');</script>
-    <!-- End Google Tag Manager -->
+    End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+    
+        w[l].push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+    
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+    
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    
+        f.parentNode.insertBefore(j, f);
+    
+    })(window, document, 'script', 'dataLayer', 'GTM-PM2PB72');
+    </script>
+    <!-- End Google Tag Manager -->    
 
-    <?php $this->renderPartial('/layouts/_clientTracking'); ?>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1798023783821856');
+        fbq('track', 'PageView');
+    </script>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-18HXYNFX81"></script>
 <script>
@@ -196,6 +233,23 @@
 
   gtag('config', 'G-18HXYNFX81');
 </script>
+
+<script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
+<script>
+    // Version: 2.0
+    window.Brevo = window.Brevo || [];
+    Brevo.push([
+        "init",
+        {
+            client_key: "m2r82r87eergko2mx59hhxuf",
+            // Optional: Add other initialization options, see documentation
+        }
+    ]);
+</script>
+
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1798023783821856&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 
     <style type="text/css">
        #popup_sub h5,#popup_sub input.btn.btn-success{text-align:center;margin-left:auto;margin-right:auto;display:block}.footer-links ul li a,ul.footer_nav li,ul.footer_nav li a{color:#fff!important}#g-recaptcha-response{display:block!important;position:absolute;margin:-78px 0 0!important;width:302px!important;height:76px!important;z-index:-999999;opacity:0;background-color:red;color:#fff}.trail-form input::placeholder{font-weight:500}.whats_bg input{background:#fff!important}.main_pointerevnt{pointer-events:none!important}p{margin:0;font-size:16px;font-weight:300;line-height:24px;padding:10px 0;word-spacing:0.2px}footer#footer ul li i{font-size:16px;padding-right:8px;color:#3e9ff6}#footer .footer-contact li{padding-bottom:7px;line-height:25px}.footer-links ul li{padding-left:6px}.back-to-top{margin-bottom:60px}#footer .footer-top .footer-newsletter input[type=submit]{border-radius:3px;margin-left:-4px}#popup_sub h5{font-size:22px;border-top:3px double #439223;border-bottom:3px double #439223;padding:8px 0;font-family:roboto;margin-bottom:30px;width:270px;font-weight:500}#popup_sub input[type=email]{border:1px solid #439223!important;margin-bottom:30px;background:#fafafa}#popup_sub input.btn.btn-success{background:#439223!important;border:1px solid #439223}#popup_sub button.close{background:#439223;color:#fff!important;padding:0 6px 6px;position:absolute;border-radius:50px}.icon-bar a{padding:5px 10px!important;font-size:22px!important}ul.footer_nav{padding:30px 0;float:right}ul.footer_nav li{list-style:none;float:left;padding:0 10px;font-size:12px}.icon_none,.mobile_stickr{display:none}@media(min-width:300px) and (max-width:600px){.mobile_stickr,.newsticker ul li{height:60px!important}.newsticker ul li{white-space:pre-wrap!important}}@media(max-width:1024px){.mobile_stickr{display:block;float:left;height:51px;width:100%;background-color:#4d4c4c;margin-top:68px}.mobile_stickr .flex-ticker__a{color:#fff!important;line-height:35px;font-size:1.6rem;text-align:center;font-weight:300!important}.topHdLeft .topHdNews{display:none}.resp_srh{position:absolute}.overlay-content form{width:100%;height:40px;top:72px;margin-left:auto;margin-right:auto;display:block}div#myOverlay .overlay-content input[type=text]{font-size:16px!important;padding-left:20px!important;padding-top:17px;margin-left:0}.overlay{margin-top:69px!important;height:115px}.overlay button{height:35px;top:3px;width:35px;right:1%}div#myOverlay .overlay-content img{width:16px;margin-top:-15px;margin-left:-4px}.newsticker ul li{width:100%;height:auto;overflow:hidden;white-space:nowrap;display:none;text-align:center;font-weight:400}.newsticker{color:#fff;cursor:default;overflow:hidden;padding:17px 10px 0 0!important;font-weight:400!important}}.newsticker{color:#fff;cursor:default;font-weight:400;overflow:hidden;padding:10px 10px 0 0}.newsticker ul li{width:auto;height:30px;overflow:hidden;white-space:nowrap;display:none}.newsticker.js-newsticker ul{margin:0;padding:0 0 0 10px}.pd-8{padding:0 4px}.icon-bar{right:0;display:block}.icon_click{background:#284c9a;cursor:pointer}.icon_click i{font-size:20px;font-weight:200!important;color:#fff}@media(min-width:768px) and (max-width:991px){.socila_mindiv .col-sm-6.col-xs-3.text-center.pd-8{margin-bottom:10px}}
@@ -401,7 +455,7 @@
     padding-top: 3px;
 }
 .bg_fig{
-background: url("<?php echo octa_asset('baccc.webp'); ?>") !important;
+background: url("/assets/baccc.webp") !important;
 background-repeat: no-repeat !important;
 background-size: 80% !important;
 background-position: right !important;
@@ -1943,16 +1997,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <div class="newsticker js-newsticker">
                   <ul class="js-frame">
                       <li class="js-item">Think CCIE. Think Octa Networks.</li>
-                      <!--<li class="js-item">CCNA Traininig Starting from 13th October 2025 6PM IST  Mon - Fri </li>-->
+                      <li class="js-item"> CCNA Offline Training starting from 28th September, 2026 </li>
                       <!--<li class="js-item">CCNA AUTOMATION Traininig Starting from 20th October 2025 6PM IST Mon - Fri </li>-->
-                      <li class="js-item">CCIE EI v1.1 Training starting from 23rd MARCH 2026 Weekly from 8:00PM-10:00PM IST </li>
+                      <li class="js-item">CCIE EI v1.1 Training starting from 14th September, 2026  </li>
                        <!--<li class="js-item">CCIE Service Provider v5.1 Training starting on 5th JAN 2026 from 8:00PM-10:00PM IST </li>-->
                         <li class="js-item">CCIE Security v6.1 Training from 16th MARCH 2026 8PM IST Mon - Fri </li>
                     <!--<li class="js-item">NSE 8 Training from 16th FEB 2026 8PM IST Mon - Fri </li>-->
                       <!--<li class="js-item">CCIE Collaboration v3.1 Traininig Starting from 15th October 2025 every Weekend from 8:00 pm IST </li>-->
                       <!--<li class="js-item">CCIE Wireless v 1.0 Traininig Starting from 5th Aug - 8th Aug </li>-->
                       <!--<li class="js-item">CCDA Training Mon,Wed & Fri from 8.30 pm to 10.30pm </li>-->
-                      <!--<li class="js-item">CCIE Data Center v3.1 Training starting from 10th Dec from 7:30 pm IST </li>-->
+                      <li class="js-item">CCIE DC v3.1 Training starting from 14th September, 2026 </li>
                       <!--<li class="js-item">CCNP Enterprise  Training starts from 20 January 8:00pm IST </li>-->
                       <!--<li class="js-item">FREE CCNA CYBEROPS Training starting from 11th November 6:00PM-8:00PM IST</li>-->
                       <!--<li class="js-item">Juniper JNCIE SP Training starting form 20th January  Weekly 8:00PM-10:00PM IST </li> -->
@@ -4492,7 +4546,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
               <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
                 <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"></path>
               </svg>
-              Subscribe Now<img src="<?php echo octa_asset('arrow.png'); ?>" <="" button="">
+              Subscribe Now<img src="/assets/arrow.png" <="" button="">
           </button></div>
         </div>
 
@@ -4612,20 +4666,20 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
         
         <div class="col-lg-6 col-md-6 col-sm-6 main_fot">
             <div class="main_fotp">
-                <img class="qr_img" src="<?php echo octa_asset('qrcode.webp'); ?>" alt="QR Code for Telegram">
+                <img class="qr_img" src="/assets/qrcode.webp" alt="QR Code for Telegram">
                 <div class="soc_div telejoin_col">
                     <a href="https://t.me/octanetworks">
-                        <p><img class="qrsoc_img" src="<?php echo octa_asset('telegram (1) 1.png'); ?>" alt="Telegram Icon">Join Now</p>
+                        <p><img class="qrsoc_img" src="/assets/telegram (1) 1.png" alt="Telegram Icon">Join Now</p>
                     </a>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 main_fot">
             <div class="main_fotp">
-                <img class="qr_img" src="<?php echo octa_asset('Rectangle 18257 (2).png'); ?>" alt="QR Code for WhatsApp">
+                <img class="qr_img" src="/assets/Rectangle 18257 (2).png" alt="QR Code for WhatsApp">
                 <div class="soc_div whatsapp_col">
                     <a href="https://chat.whatsapp.com/KtvTghoOEK2EvFsz5178L6">
-                        <p><img class="qrsoc_img" src="<?php echo octa_asset('square-whatsapp 1.png'); ?>" alt="WhatsApp Icon">Join Now</p>
+                        <p><img class="qrsoc_img" src="/assets/square-whatsapp 1.png" alt="WhatsApp Icon">Join Now</p>
                     </a>
                 </div>
             </div>
@@ -5193,7 +5247,7 @@ $(document).ready(function(){
   });
 });
 </script>
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/js/manage.js"></script>
+      <!--<script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/js/manage.js"></script>--> 
 
       <style>#ps-timeline01b4485419e56f26a8c231cc034f4b69 .ps_timeline-marker:before{background:#3e9ff6 !important}#ps-timeline01b4485419e56f26a8c231cc034f4b69 .ps_timeline-content .ps_timeline-label{color:#284c9a !important;font-weight:600 !important;font-size:36px !important;font-family:'Open Sans',sans-serif !important}#ps-timeline01b4485419e56f26a8c231cc034f4b69 .ps_timeline-content .ps_timeline-title{border-bottom-color:#5ac17c !important;font-size:20px !important;font-family:'Poppins',sans-serif !important;border-bottom-style:dotted !important;margin-bottom:18px !important}#ps-timeline01b4485419e56f26a8c231cc034f4b69 .icon-placeholder-v
          i{color:#15439f !important}#ps-timeline01b4485419e56f26a8c231cc034f4b69 .ps_timeline-marker:after{background:#5ac17c !important}
@@ -5470,12 +5524,12 @@ $(function () {
 }
 </style>
 
-<!--<script defer src="https://www.google.com/recaptcha/api.js?render=<?= Yii::app()->params['siteKey'] ?>"></script>-->
+<!--<script defer src="https://www.google.com/recaptcha/api.js?render=6LfWN7snAAAAAJT2v4CMKLpdsUmx5ATGtIKVtA-W"></script>-->
 <script>
       function onClick(e) {
         e.preventDefault();
         grecaptcha.ready(function() {
-          grecaptcha.execute('<?= Yii::app()->params['siteKey'] ?>', {action: 'submit'}).then(function(token) {
+          grecaptcha.execute('6LfWN7snAAAAAJT2v4CMKLpdsUmx5ATGtIKVtA-W', {action: 'submit'}).then(function(token) {
               // Add your logic to submit to your backend server here.
           });
         });
@@ -5576,9 +5630,19 @@ buttons.forEach(function(button) {
   }
 });
 </script>
-<!-- BEGIN ProvideSupport.com Graphics Chat Button Code -->
-<script>(function(D){function f(){function n(n,e){e=D.createElement("script");e.src="https://image.providesupport.com/"+n,D.body.appendChild(e)}n("js/0ffwyo3697w640x7d9e4ka1u62/safe-standard-sync.js?ps_h=c1vJ&ps_t="+Date.now()),n("sjs/static.js")}D.readyState=="complete"?f():window.addEventListener("load",f)})(document)</script><noscript><div style="display:inline"><a href="https://vm.providesupport.com/0ffwyo3697w640x7d9e4ka1u62">Online Customer Support</a></div></noscript>
-<!-- END ProvideSupport.com Graphics Chat Button Code -->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/699d63c14e09341c35186d46/1ji7crb3u';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
    </body>
 </html>
 

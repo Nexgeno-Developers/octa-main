@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/load-secrets.php';
+require_once dirname(__FILE__) . '/load-secrets.php';
 $secrets = octa_load_secrets();
 
 // uncomment the following to define a path alias
@@ -22,15 +22,17 @@ return array(
 		'application.components.*',
 	),
 
-	'modules'=>array_merge(
-		array('main', 'octa'),
-		!empty($secrets['giiEnabled']) ? array(
-			'gii' => array(
-				'class' => 'system.gii.GiiModule',
-				'password' => $secrets['giiPassword'],
-				'ipFilters' => array('127.0.0.1', '::1'),
-			),
-		) : array()
+	'modules'=>array(
+            'main','octa',
+		// uncomment the following to enable the Gii tool
+		
+		  'gii'=>array(
+			'class'=>'system.gii.GiiModule',
+			'password'=>$secrets['giiPassword'],
+			// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			'ipFilters'=>array('127.0.0.1','::1','101.50.102.219'),
+		), 
+		
 	),
 
 	// application components
@@ -165,10 +167,12 @@ return array(
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
-		'db_blog' => require(dirname(__FILE__).'/database_blog.php'),
+		'db_blog'=>require(dirname(__FILE__).'/database_blog.php'),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
+// 			'errorAction'=>YII_DEBUG ? null : 'main/default/error',
+			//'errorAction' => 'site/error',
 			'errorAction' => 'main/default',
 		),
 
@@ -196,7 +200,8 @@ return array(
 		// this is used in contact page
 				'adminEmail'=>'support@octanetworks.com',
                 'mydate'=>date('Y-m-d H:i:s', strtotime( '+10 hours' )),
-				'from'=>'alert@octanetworks.com',
+                'from'=>'alert@octanetworks.com',
+				'baseUrl'=>octa_base_url(),
 				'siteKey'=>$secrets['recaptchaSiteKey'],
 				'secretKey'=>$secrets['recaptchaSecretKey'],
 				'razorpayKeyId'=>$secrets['razorpayKeyId'],
@@ -204,8 +209,8 @@ return array(
 				'payuMerchantKey'=>$secrets['payuMerchantKey'],
 				'payuSalt'=>$secrets['payuSalt'],
 				'payuBaseUrl'=>$secrets['payuBaseUrl'],
-				'brevoClientKey'=>$secrets['brevoClientKey'],
-				'facebookPixelId'=>$secrets['facebookPixelId'],
 				'enableClientTracking'=>!empty($secrets['enableClientTracking']),
+				'facebookPixelId'=>isset($secrets['facebookPixelId']) ? $secrets['facebookPixelId'] : '',
+				'brevoClientKey'=>isset($secrets['brevoClientKey']) ? $secrets['brevoClientKey'] : '',
 	),
 );

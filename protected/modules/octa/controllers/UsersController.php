@@ -1,5 +1,5 @@
 <?php
-require_once Yii::getPathOfAlias('application') . '/vendor/autoload.php';
+require '/home2/octanetw/public_html/protected/vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
