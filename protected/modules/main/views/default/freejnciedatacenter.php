@@ -2276,17 +2276,17 @@ figure.snip0056{width: 100% !important;}
     <div class="container">
         <h6>Happy Students</h6>
         <div id="happyStudentsCarousel" class="owl-carousel owl-theme">
-            <div class="item"><img src="/assets/Jncie1.webp" alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie2.webp" alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie3.webp" alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie4.webp" alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie5.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie6.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie7.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie8.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/Jncie9.webp"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS6.png"alt="Student 11"></div>
-            <div class="item"><img src="/assets/SS7.png"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie1.webp" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie2.webp" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie3.webp" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie4.webp" alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie5.webp"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie6.webp"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie7.webp"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie8.webp"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/Jncie9.webp"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/SS6.png"alt="Student 11"></div>
+            <div class="item"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/SS7.png"alt="Student 11"></div>
         </div>
     </div>
 </section>
@@ -2762,8 +2762,8 @@ if($segments[1] == "ccie-security_v6.1_training"){
             autoplayTimeout: 3000,        // Time between slides (in milliseconds)
             autoplayHoverPause: true,     // Pause on hover
             navText: [
-                '<img src="/assets/leftarrow.png" alt="Previous">',
-                '<img src="/assets/rightarrow.png" alt="Next">'
+                '<img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/leftarrow.png" alt="Previous">',
+                '<img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/rightarrow.png" alt="Next">'
             ],
             responsive: {
                 0: {
