@@ -365,14 +365,34 @@ class FormsController extends CController {
 																$model->email = $spram[2];
 																$model->date_added = Yii::app()->params['mydate'];
 																$model->save(); 
-														} 
+														}
+
+											try {
+												addToZoho(
+													$spram[2],
+													$spram[1],
+													$spram[3],
+													isset($spram[4]) ? $spram[4] : '',
+													'',
+													'Get Touch Form'
+												);
+											} catch (Throwable $e) {
+												error_log('addToZoho: ' . $e->getMessage());
+											}
 
 										}
 
 
                     if ($spram[1] != "" AND $spram[2] != "" AND $spram[3] != "") {
-                        email_gettouch($spram);
-												$this->redirect(Yii::app()->createUrl("main/default/thankyou"));
+                        try {
+							email_gettouch($spram);
+						} catch (Throwable $e) {
+							error_log('email_gettouch: ' . $e->getMessage());
+						}
+												$this->redirect(Yii::app()->createUrl("main/default/thankyou", array(
+													'name' => $spram[1],
+													'course' => $spram[4],
+												)));
                         $msg = "Thank you for your message. It has been sent.";
                         Yii::app()->user->setState("fmessage", $msg);
                     $this->redirect(Yii::app()->createUrl("main/default/message",array("type"=>"1")));
