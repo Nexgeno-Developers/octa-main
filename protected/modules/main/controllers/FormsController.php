@@ -369,19 +369,27 @@ class FormsController extends CController {
 											} 
 											
 								// 			$mc = addToMailchimp($spram[2], $spram[1], "", $spram[3]);
-											$zoho = addToZoho(
-                                                $spram[2], // email
-                                                $spram[1], // name
-                                                $spram[3], // phone
-                                                isset($spram[4]) ? $spram[4] : '', // course
-                                                '', // message
-                                                'Get Touch Form'
-                                            );
+											try {
+												addToZoho(
+													$spram[2],
+													$spram[1],
+													$spram[3],
+													isset($spram[4]) ? $spram[4] : '',
+													'',
+													'Get Touch Form'
+												);
+											} catch (Throwable $e) {
+												error_log('addToZoho: ' . $e->getMessage());
+											}
 							            }
 
 
                     if ($spram[1] != "" AND $spram[2] != "" AND $spram[3] != "") {
-                        email_gettouch($spram);
+                        try {
+							email_gettouch($spram);
+						} catch (Throwable $e) {
+							error_log('email_gettouch: ' . $e->getMessage());
+						}
 						// $this->redirect(Yii::app()->createUrl("main/default/thankyou"));
 						$this->redirect(Yii::app()->createUrl("main/default/thankyou", [
                             'name' => $spram[1],

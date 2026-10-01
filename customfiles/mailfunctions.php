@@ -1081,6 +1081,12 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 	function addToZoho($email = '', $name = '', $phone = '', $course = '', $message = '', $source = 'Octa Website') {
         try {
             $config = octa_load_secrets();
+            foreach (array('zohoAccountsBase', 'zohoClientId', 'zohoClientSecret', 'zohoRefreshToken', 'zohoCampaignsBase', 'zohoListKey') as $zohoKey) {
+                if (empty($config[$zohoKey])) {
+                    error_log('Zoho skipped: missing ' . $zohoKey);
+                    return false;
+                }
+            }
     
             // Get Zoho access token
             $tokenUrl = rtrim($config['zohoAccountsBase'], '/') . '/oauth/v2/token';
@@ -1109,10 +1115,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
             $tokenData = json_decode($tokenBody, true);
     
             if ($tokenCode !== 200 || empty($tokenData['access_token'])) {
-               error_log(
-                    'Zoho token error. HTTP ' . $tokenCode,
-                    CLogger::LEVEL_ERROR
-                );
+               error_log('Zoho token error. HTTP ' . $tokenCode);
                 return false;
             }
     
@@ -1160,29 +1163,20 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
             $response = json_decode($responseBody, true);
     
             if ($responseCode < 200 || $responseCode >= 300) {
-               error_log(
-                    'Zoho subscribe error. HTTP ' . $responseCode,
-                    CLogger::LEVEL_ERROR
-                );
+               error_log('Zoho subscribe error. HTTP ' . $responseCode);
                 return false;
             }
     
             if (isset($response['status']) &&
                 strtolower($response['status']) === 'error') {
-               error_log(
-                    'Zoho rejected contact',
-                    CLogger::LEVEL_ERROR
-                );
+               error_log('Zoho rejected contact');
                 return false;
             }
     
             return true;
     
-        } catch (Exception $e) {
-           error_log(
-                'Zoho exception: ' . $e->getMessage(),
-                CLogger::LEVEL_ERROR
-            );
+        } catch (Throwable $e) {
+           error_log('Zoho exception: ' . $e->getMessage());
             return false;
         }
     }
