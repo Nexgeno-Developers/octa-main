@@ -66,4 +66,11 @@ return array(
 	'facebookPixelId' => 'your-facebook-pixel-id',
 	'mailchimpApiKey' => 'your-mailchimp-api-key',
 	'mailchimpListId' => 'your-mailchimp-list-id',
+	'zohoClientId' => 'your-zoho-client-id',
+	'zohoClientSecret' => 'your-zoho-client-secret',
+	'zohoRefreshToken' => 'your-zoho-refresh-token',
+	'zohoListKey' => 'your-zoho-list-key',
+	'zohoAccountsBase' => 'https://accounts.zoho.in',
+	'zohoCampaignsBase' => 'https://campaigns.zoho.in',
+	'zohoSource' => 'Octa Website',
 );
