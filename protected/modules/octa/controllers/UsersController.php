@@ -455,7 +455,8 @@ class UsersController extends CController
                 // check for duplicate
                 $email=$_POST['email'];
                 $cri= new CDbCriteria();
-                $cri->condition="email='$email'";
+                $cri->condition = "email=:email";
+                $cri->params = array(":email" => $email);
                 $check=  User::model()->findAll($cri);
                 if ($check)
                 {

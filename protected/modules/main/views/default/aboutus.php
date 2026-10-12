@@ -331,7 +331,7 @@ h5.sub-head1 {
 </div>
 
 
-<?/*<?php 
+<?php /*
    if(!empty($content->photo2)){
     $imgPath = Yii::app()->request->getBaseUrl(true) . '/img/ebackground/'.$content->photo2;
    
@@ -357,7 +357,7 @@ h5.sub-head1 {
    <h1><?php echo $content->heading ?></h1>
    </div>
 </section>
-<?php    } */?>
+*/ ?>
 <section class="breadcrumb">
 	<div class="container">
 		<ol class="breadcrumb">

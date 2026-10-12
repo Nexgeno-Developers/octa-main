@@ -8,6 +8,8 @@
  */
 return array(
 	'environment' => 'local',
+	// Set true only while diagnosing a local development issue.
+	'debug' => false,
 	'baseUrl' => array(
 		'local' => 'http://localhost/octanetwork',
 		'live' => 'https://octanetworks.com',

@@ -24,6 +24,20 @@ class Forms extends CActiveRecord
 	}
 
 	/**
+	 * Removes markup and control bytes from public lead fields before validation and persistence.
+	 */
+	protected function beforeValidate()
+	{
+		foreach ($this->getAttributes() as $attribute => $value) {
+			if (is_string($value)) {
+				$this->{$attribute} = trim(strip_tags(str_replace("\0", '', $value)));
+			}
+		}
+
+		return parent::beforeValidate();
+	}
+
+	/**
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()

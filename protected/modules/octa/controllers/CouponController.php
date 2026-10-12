@@ -21,7 +21,8 @@ class CouponController extends CController
 			if(!empty($_POST)){
 				$code=  Yii::app()->request->getPost("code");
 				$cri = new CDbCriteria();
-				$cri->condition="code='$code'";
+				$cri->condition = "code=:code";
+                $cri->params = array(":code" => $code);
 				$check=  Coupon::model()->find($cri);
 				
 				if ($check){

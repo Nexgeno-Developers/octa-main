@@ -49,6 +49,16 @@ function octa_env_key()
 	return 'live';
 }
 
+/**
+ * Debugging may be enabled only for a local environment. The flag is kept in
+ * secrets.local.php so it is never dependent on server-level environment setup.
+ */
+function octa_debug_enabled()
+{
+	$secrets = octa_load_secrets();
+	return octa_env_key() === 'local' && !empty($secrets['debug']);
+}
+
 function octa_base_url()
 {
 	$secrets = octa_load_secrets();

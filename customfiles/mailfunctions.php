@@ -23,6 +23,17 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 
 ////////////////////////////////////////////
 
+function octa_render_mail_template($tokens, $values, $template)
+{
+    $safeValues = array();
+    foreach ($values as $value) {
+        $value = trim(strip_tags(str_replace("\0", "", (string) $value)));
+        $safeValues[] = nl2br(htmlspecialchars($value, ENT_QUOTES, "UTF-8"));
+    }
+
+    return str_replace($tokens, $safeValues, $template);
+}
+
     function create_contact_sendblue($emailid)
     {
         $curl = curl_init();
@@ -71,7 +82,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -104,7 +115,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -137,7 +148,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -170,7 +181,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -203,7 +214,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -236,7 +247,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		$mail = new PHPMailer(true); // exceptions enabled
 		try {
@@ -276,7 +287,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -310,7 +321,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -344,7 +355,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -377,7 +388,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -411,7 +422,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -444,7 +455,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -478,7 +489,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -512,7 +523,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -545,7 +556,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -578,7 +589,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -611,7 +622,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -644,7 +655,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -677,7 +688,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -710,7 +721,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -744,7 +755,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -778,7 +789,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -813,7 +824,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 // 		$mail= new PHPMailer();
 //   		$mail->IsSMTP();  
@@ -871,7 +882,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -904,7 +915,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject='FREE CCIE Enterprise Infrastructure v1.0 Course Training';  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -939,7 +950,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = $GLOBALS["username"];
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -973,7 +984,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = 'tamir@nexgeno.in';
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);
@@ -1006,7 +1017,7 @@ $GLOBALS["mailchimpListId"] = $octaSecrets['mailchimpListId'];
 		$to = 'hemal.shah@octanetworks.com';
 		$from = $GLOBALS["username"];
 		$Subject=$mailt->mailtitle;  
-		$MailContent = str_replace($farr, $aarr,$mailt->mailcontent);
+		$MailContent = octa_render_mail_template($farr, $aarr, $mailt->mailcontent);
 
 		/*New SMTP - START*/
         $mail = new PHPMailer(true);

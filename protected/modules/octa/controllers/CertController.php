@@ -81,7 +81,8 @@ class CertController extends CController
 				
 
                 $cri= new CDbCriteria();
-                $cri->condition="url='$url_name'";
+                $cri->condition = "url=:url";
+                $cri->params = array(":url" => $url_name);
                 $check=  Cert::model()->exists($cri);
                 if ($check)
                 {
@@ -295,7 +296,8 @@ class CertController extends CController
             $id=Yii::app()->request->getParam('id');
             
             $cri=new CDbCriteria();
-            $cri->condition="cert_id=$id";
+            $cri->condition = "cert_id=:cert_id";
+            $cri->params = array(":cert_id" => (int) $id);
             
             Exam::model()->deleteAll($cri);
                     

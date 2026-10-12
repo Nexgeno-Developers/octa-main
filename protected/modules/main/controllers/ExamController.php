@@ -148,7 +148,8 @@ class ExamController extends CController
 					$gallery = GalleryImages::model()->findAll($cri4);
 					
 					$cri5 = new CDbCriteria();
-					$cri5->condition="course_slug = '$url' AND status=1 ";
+					$cri5->condition = "course_slug = :course_slug AND status = :status";
+                    $cri5->params = array(":course_slug" => $url, ":status" => 1);
 					$cri5->order="id desc";
 					$comments = Comments::model()->findAll($cri5);
 					$countries = Countries::model()->findAll();

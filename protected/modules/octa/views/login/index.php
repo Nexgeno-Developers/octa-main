@@ -9,6 +9,7 @@
 ?>
 
 <form class="form-signin" action="<?php echo Yii::app()->createUrl("octa/login/login");?>" method="POST">
+    <?php echo CHtml::hiddenField(Yii::app()->request->csrfTokenName, Yii::app()->request->csrfToken); ?>
         <h2 class="form-signin-heading">Sign in now</h2>
         <div class="login-wrap">
             <div class="user-login-info">

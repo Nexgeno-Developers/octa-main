@@ -17,13 +17,16 @@ class OctaModule extends CWebModule
 
 	public function beforeControllerAction($controller, $action)
 	{
-		if(parent::beforeControllerAction($controller, $action))
-		{
-			// this method is called before any module controller action is performed
-			// you may place customized code here
-			return true;
-		}
-		else
+		if (!parent::beforeControllerAction($controller, $action)) {
 			return false;
+		}
+
+		// All Octa module routes are administrative, except the login endpoints.
+		if ($controller->id !== 'login' && !Yii::app()->user->hasState('admin')) {
+			$controller->redirect(Yii::app()->createUrl('octa/login'));
+			return false;
+		}
+
+		return true;
 	}
 }

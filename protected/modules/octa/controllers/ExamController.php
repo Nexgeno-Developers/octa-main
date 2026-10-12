@@ -282,7 +282,8 @@ class ExamController extends CController
 			
 
 			$cri= new CDbCriteria();
-			$cri->condition="url='$eurl'";
+			$cri->condition = "url=:url";
+            $cri->params = array(":url" => $eurl);
 			$check=Exam::model()->exists($cri);
 			
 			if ($check){
@@ -638,7 +639,8 @@ class ExamController extends CController
             {
                 $id=$_POST['id'];
                 $cri =new CDbCriteria();
-                $cri->condition="cert_id=$id";
+                $cri->condition = "cert_id=:cert_id";
+                $cri->params = array(":cert_id" => (int) $id);
                 $Exams= Exam::model()->findAll($cri);
                 if ($Exams)
                 {
@@ -663,7 +665,8 @@ class ExamController extends CController
             {
                 $id=$_POST['id'];
                 $cri =new CDbCriteria();
-                $cri->condition="vendor_id=$id";
+                $cri->condition = "vendor_id=:vendor_id";
+                $cri->params = array(":vendor_id" => (int) $id);
                 $Certs=  Cert::model()->findAll($cri);
                 if ($Certs)
                 {
@@ -711,7 +714,8 @@ class ExamController extends CController
 				$e_cert_id = $eexam->cert_id;
 
                 $cri =new CDbCriteria();
-                $cri->condition="vendor_id=$e_vendor_id AND id != $e_cert_id";
+                $cri->condition = "vendor_id=:vendor_id AND id != :cert_id";
+                $cri->params = array(":vendor_id" => (int) $e_vendor_id, ":cert_id" => (int) $e_cert_id);
                 $Certs = Cert::model()->findAll($cri);
                 if ($Certs)
                 {
