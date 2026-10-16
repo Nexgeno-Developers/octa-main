@@ -1428,7 +1428,7 @@ h2#myModalLabel{color:#fff;text-align:center;}
 .modal-header{padding:54px 20px 0px 20px !important;border-bottom:00px solid #e5e5e5;}
 .modal-header{padding:15px;border-bottom:0px solid #e5e5e5 !important;background:transparent;}
 input.sub_btn{width:39% !important;text-align:center;margin-left:auto;margin-right:auto;display:block;text-transform:uppercase;border:0px !important;padding:5px 10px;font-size:18px;line-height:1.3333333;border-radius:10px;background:#3d9ff6;}
-.modal-header .close1{margin-top:14px;margin-right:7px !important;color:#fff !important;top:-10px;position:absolute !important;}.blue_clr{background:#40a1f6;color:#fff;text-align:center;padding:0px 20px 0px 20px;}
+.modal-header .close1{margin-top:14px;margin-right:7px !important;color:#fff !important;top:-10px;position:absolute !important;}.blue_clr{background:#1f75c4;color:#fff;text-align:center;padding:0px 20px 0px 20px;}
 .green_clr{background:#5fc27f;color:#fff;text-align:center;padding:0px 20px 0px 20px;}
 .blue_clr{float:left;width:110%;}
 .green_clr{float:left;width:110%;}
@@ -6613,7 +6613,7 @@ img.oneplusoneimg {
     padding-top: 3px;
 }
 .bg_fig{
-background: url("/assets/baccc.webp") !important;
+background: url("../assets/baccc.webp") !important;
 background-repeat: no-repeat !important;
 background-size: 80% !important;
 background-position: right !important;
@@ -7263,7 +7263,7 @@ padding-top:20px;
     border-radius: 15px;
 }
 .faq_section input[type=tel]{
-    color:#a0a0a0 !important;
+    color:#6b6b6b !important;
 }
 .faq_section .intl-tel-input .flag-dropdown .selected-flag {
     padding: 12px 16px 12px 6px !important;
@@ -7306,7 +7306,7 @@ span.country-name {
     border-radius: 5px;
     display: flex;
     align-items: center;
-    background-image: url('/images/Screenshot 2024-07-17 150927.jpg');
+    background-image: url('../images/Screenshot 2024-07-17 150927.jpg');
     background-size: cover; 
     background-position: center;
 }

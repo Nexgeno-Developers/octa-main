@@ -1,9 +1,16 @@
-<!DOCTYPE html>
+<?php ob_start(); $octaSkipMega = OctaDevice::skipDesktopMegaMenu(); if (!headers_sent()) { header('Vary: User-Agent', false); } // markup differs for phones: caches must key on the user agent ?><!DOCTYPE html>
 <html lang="en">
    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <?php if (!empty(Yii::app()->params['heroPreloads'])) { foreach (Yii::app()->params['heroPreloads'] as $octaPreload) { ?>
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="<?php echo CHtml::encode($octaPreload['href']); ?>" media="<?php echo CHtml::encode($octaPreload['media']); ?>">
+    <?php } } ?>
+    <?php if (is_file(Yii::getPathOfAlias('webroot') . '/css/poppins.css')) { $octaFontBase = Yii::app()->request->baseUrl; ?>
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="<?php echo $octaFontBase; ?>/fonts/poppins/poppins-400-latin.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="<?php echo $octaFontBase; ?>/fonts/poppins/poppins-600-latin.woff2">
+    <?php } ?>
     <meta name="author" content="Octa Networks">
    <script type="application/ld+json">
 {
@@ -130,122 +137,117 @@
     <div class="hide">
         <?php //var_dump($this->pageDescription); ?>
     </div>
-          <!-- Bootstrap CSS File -->
-    <link rel="preload" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <!--<link async rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css" />-->
-    <!--<link async rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css" />-->
-    <link href="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/owlcarousel/assets/owl.carousel.min.css"
-        rel="stylesheet">
-    <link href="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Main Stylesheet File -->
-    <link href="<?php echo Yii::app()->request->getBaseUrl(true)?>/css/style.css?v=1.1" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- Critical CSS (render blocking) -->
+<?php
+    // Phones get the above-the-fold CSS inline (css/critical-mobile.css, built by tools/build-critical-css.js) and the full
+    // stylesheets load without blocking the first paint. A stale critical file (older than style.css) is ignored.
+    $octaCriticalCss = '';
+    // only the home page has a critical-CSS file; other pages keep the regular blocking stylesheets
+    if ($octaSkipMega && Yii::app()->controller->route === 'main/default/index') {
+        $octaCssDir = Yii::getPathOfAlias('webroot') . '/css/';
+        if (is_file($octaCssDir . 'critical-mobile.css')) {
+            $octaCss = (string) file_get_contents($octaCssDir . 'critical-mobile.css');
+            $octaHash = '';
+            foreach (array('style.css', 'main_css_mega_mnu.css', 'hover.css', 'bootstrap.min.css', 'stye_mega_menu.css', 'demo.css') as $octaSrc) {
+                $octaHash .= is_file($octaCssDir . $octaSrc) ? md5_file($octaCssDir . $octaSrc) : '';
+            }
+            if (strpos($octaCss, '/*src:' . md5($octaHash) . '*/') === 0) {
+                $octaCriticalCss = $octaCss;
+            }
+        }
+    }
+    if ($octaCriticalCss !== '') { ?>
+    <style id="critical-css"><?php echo $octaCriticalCss; ?></style>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/style.css?v=1.2" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/style.css?v=1.2"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/main_css_mega_mnu.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/main_css_mega_mnu.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/bootstrap.min.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/bootstrap.min.css"></noscript>
+    <?php } else { ?>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/style.css?v=1.2">
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/main_css_mega_mnu.css" />
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true)?>/css/hover.css" />
-    <script async src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/jquery.min-v3.4.1.js"></script>
-    <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true)?>/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true)?>/css/jquery-ui.css">
-    <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/js/jquery-ui.js"></script>
-    <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/mega_menu.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flexslider@2.7.2/jquery.flexslider.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flexslider@2.7.2/flexslider.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/intlTelInput.css">
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/jquery.fancybox.css">
-    <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/supersubs.js"></script>
-    <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/superfish.js"></script>
-    <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/superfish.min.js"></script>
-    <script defer src='https://www.google.com/recaptcha/api.js'></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-08YS0XHTF8"></script>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/bootstrap.min.css">
+    <?php } ?>
+    <!-- Non-critical CSS (loaded without blocking first paint) -->
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/owlcarousel/assets/owl.carousel.min.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/owlcarousel/assets/owl.carousel.min.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/lightbox/css/lightbox.min.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/lightbox/css/lightbox.min.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/jquery-ui.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/jquery-ui.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexslider@2.7.2/flexslider.min.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flexslider@2.7.2/flexslider.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/intlTelInput.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/intlTelInput.css"></noscript>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/jquery.fancybox.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/jquery.fancybox.css"></noscript>
+    <!-- icon fonts: show fallback text immediately instead of blocking the first paint (declared after the stylesheets so it wins) -->
+    <style>
+    @font-face{font-family:'FontAwesome';src:url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff');font-weight:normal;font-style:normal;font-display:swap}
+    @font-face{font-family:'Glyphicons Halflings';src:url('<?php echo Yii::app()->request->getBaseUrl(true); ?>/fonts/glyphicons-halflings-regular.woff2') format('woff2'),url('<?php echo Yii::app()->request->getBaseUrl(true); ?>/fonts/glyphicons-halflings-regular.woff') format('woff');font-display:swap}
+    </style>
+    <!-- jQuery + Bootstrap stay synchronous because inline page scripts rely on them; everything else is deferred (executes in order before DOMContentLoaded) -->
+    <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/jquery-1.12.4-migrate.min.js?v=1"></script>
+    <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/bootstrap.min.js"></script>
+    <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/jquery-ui.js"></script>
+    <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/mega_menu_rest.js?v=1"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/flexslider@2.7.2/jquery.flexslider.min.js"></script>
+    <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/supersubs.js"></script>
+    <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/superfish.js"></script>
+    <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/superfish.min.js"></script>
+    <script>
+        /* Third-party scripts (analytics, pixels, chat, captcha) are loaded after the first user
+           interaction (or a late fallback) so they do not block rendering or inflate Total Blocking Time. */
+        window.octaThirdParty = [];
+        window.octaLater = function (fn) { window.octaThirdParty.push(fn); };
+        (function () {
+            var done = false;
+            function run() {
+                if (done) { return; } done = true;
+                ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'].forEach(function (e) { window.removeEventListener(e, run); });
+                window.octaThirdParty.forEach(function (fn) { try { fn(); } catch (err) {} });
+            }
+            ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'].forEach(function (e) { window.addEventListener(e, run, { passive: true, once: true }); });
+            window.addEventListener('load', function () { setTimeout(run, 12000); });
+            window.octaLoadScript = function (src, attrs, replayLoad) {
+                var s = document.createElement('script'); s.src = src; s.async = true;
+                if (attrs) { for (var k in attrs) { s[k] = attrs[k]; } }
+                if (replayLoad) {
+                    /* scripts that only init on window "load" would miss it once deferred: capture and replay */
+                    var orig = window.addEventListener, caps = [];
+                    window.addEventListener = function (t, f, o) { if (t === 'load') { caps.push(f); } else { orig.call(this, t, f, o); } };
+                    s.onload = s.onerror = function () { window.addEventListener = orig; caps.forEach(function (f) { try { f.call(window, new Event('load')); } catch (e) {} }); };
+                }
+                document.head.appendChild(s); return s;
+            };
+        })();
+    </script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-08YS0XHTF8');
-    </script>
-
-    <!-- Event snippet for CCIE India Conv conversion page -->
-    <script async>
         gtag('event', 'conversion', { 'send_to': 'AW-760627314/esGeCPz8sbMBEPKA2eoC' });
-    </script>
-
-    <!-- Google Tag Manager
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({n
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-PM2PB72');</script>
-    End Google Tag Manager -->
-    <!-- Google Tag Manager -->
-    <script>
-    (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-    
-        w[l].push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
+        gtag('config', 'G-18HXYNFX81');
+        octaLater(function () {
+            octaLoadScript('https://www.googletagmanager.com/gtag/js?id=G-08YS0XHTF8');
+            octaLoadScript('https://www.googletagmanager.com/gtag/js?id=G-18HXYNFX81');
+            octaLoadScript('https://www.google.com/recaptcha/api.js');
         });
-    
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != 'dataLayer' ? '&l=' + l : '';
-    
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-    
-        f.parentNode.insertBefore(j, f);
-    
-    })(window, document, 'script', 'dataLayer', 'GTM-PM2PB72');
     </script>
-    <!-- End Google Tag Manager -->    
 
-    <!-- Meta Pixel Code -->
     <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1798023783821856');
-        fbq('track', 'PageView');
+        window.fbq = function () { fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments); };
+        window._fbq = window.fbq; fbq.push = fbq; fbq.loaded = true; fbq.version = "2.0"; fbq.queue = [];
+        fbq("init", "1798023783821856");
+        fbq("track", "PageView");
+        window.Brevo = window.Brevo || [];
+        Brevo.push(["init", { client_key: "m2r82r87eergko2mx59hhxuf" }]);
+        octaLater(function () {
+            octaLoadScript("https://www.googletagmanager.com/gtm.js?id=GTM-PM2PB72&l=dataLayer");
+            octaLoadScript("https://connect.facebook.net/en_US/fbevents.js");
+            octaLoadScript("https://cdn.brevo.com/js/sdk-loader.js");
+        });
+        dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
     </script>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-18HXYNFX81"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-18HXYNFX81');
-</script>
-
-<script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
-<script>
-    // Version: 2.0
-    window.Brevo = window.Brevo || [];
-    Brevo.push([
-        "init",
-        {
-            client_key: "m2r82r87eergko2mx59hhxuf",
-            // Optional: Add other initialization options, see documentation
-        }
-    ]);
-</script>
 
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1798023783821856&ev=PageView&noscript=1" /></noscript>
@@ -254,9 +256,18 @@
     <style type="text/css">
        #popup_sub h5,#popup_sub input.btn.btn-success{text-align:center;margin-left:auto;margin-right:auto;display:block}.footer-links ul li a,ul.footer_nav li,ul.footer_nav li a{color:#fff!important}#g-recaptcha-response{display:block!important;position:absolute;margin:-78px 0 0!important;width:302px!important;height:76px!important;z-index:-999999;opacity:0;background-color:red;color:#fff}.trail-form input::placeholder{font-weight:500}.whats_bg input{background:#fff!important}.main_pointerevnt{pointer-events:none!important}p{margin:0;font-size:16px;font-weight:300;line-height:24px;padding:10px 0;word-spacing:0.2px}footer#footer ul li i{font-size:16px;padding-right:8px;color:#3e9ff6}#footer .footer-contact li{padding-bottom:7px;line-height:25px}.footer-links ul li{padding-left:6px}.back-to-top{margin-bottom:60px}#footer .footer-top .footer-newsletter input[type=submit]{border-radius:3px;margin-left:-4px}#popup_sub h5{font-size:22px;border-top:3px double #439223;border-bottom:3px double #439223;padding:8px 0;font-family:roboto;margin-bottom:30px;width:270px;font-weight:500}#popup_sub input[type=email]{border:1px solid #439223!important;margin-bottom:30px;background:#fafafa}#popup_sub input.btn.btn-success{background:#439223!important;border:1px solid #439223}#popup_sub button.close{background:#439223;color:#fff!important;padding:0 6px 6px;position:absolute;border-radius:50px}.icon-bar a{padding:5px 10px!important;font-size:22px!important}ul.footer_nav{padding:30px 0;float:right}ul.footer_nav li{list-style:none;float:left;padding:0 10px;font-size:12px}.icon_none,.mobile_stickr{display:none}@media(min-width:300px) and (max-width:600px){.mobile_stickr,.newsticker ul li{height:60px!important}.newsticker ul li{white-space:pre-wrap!important}}@media(max-width:1024px){.mobile_stickr{display:block;float:left;height:51px;width:100%;background-color:#4d4c4c;margin-top:68px}.mobile_stickr .flex-ticker__a{color:#fff!important;line-height:35px;font-size:1.6rem;text-align:center;font-weight:300!important}.topHdLeft .topHdNews{display:none}.resp_srh{position:absolute}.overlay-content form{width:100%;height:40px;top:72px;margin-left:auto;margin-right:auto;display:block}div#myOverlay .overlay-content input[type=text]{font-size:16px!important;padding-left:20px!important;padding-top:17px;margin-left:0}.overlay{margin-top:69px!important;height:115px}.overlay button{height:35px;top:3px;width:35px;right:1%}div#myOverlay .overlay-content img{width:16px;margin-top:-15px;margin-left:-4px}.newsticker ul li{width:100%;height:auto;overflow:hidden;white-space:nowrap;display:none;text-align:center;font-weight:400}.newsticker{color:#fff;cursor:default;overflow:hidden;padding:17px 10px 0 0!important;font-weight:400!important}}.newsticker{color:#fff;cursor:default;font-weight:400;overflow:hidden;padding:10px 10px 0 0}.newsticker ul li{width:auto;height:30px;overflow:hidden;white-space:nowrap;display:none}.newsticker.js-newsticker ul{margin:0;padding:0 0 0 10px}.pd-8{padding:0 4px}.icon-bar{right:0;display:block}.icon_click{background:#284c9a;cursor:pointer}.icon_click i{font-size:20px;font-weight:200!important;color:#fff}@media(min-width:768px) and (max-width:991px){.socila_mindiv .col-sm-6.col-xs-3.text-center.pd-8{margin-bottom:10px}}
     </style>
+    <style>footer#footer ul.footer_nav li a{display:inline-block;padding:7px 4px}.newsticker ul li.js-item:first-child{display:block}header nav#main-nav{display:none}.hc-offcanvas-nav{visibility:hidden;display:none;position:fixed;top:0;height:100%;z-index:9999}:where(img[width][height]){height:auto}@media(max-width:767px){#ncourse_section,#newest_section,#cciecourse_section{content-visibility:auto;contain-intrinsic-size:auto 3900px}.creating_sec{content-visibility:auto;contain-intrinsic-size:auto 1320px}.success-stories-sec{content-visibility:auto;contain-intrinsic-size:auto 1430px}section.faq_section{content-visibility:auto;contain-intrinsic-size:auto 1000px}footer#footer{content-visibility:auto;contain-intrinsic-size:auto 1280px}}.form-control::placeholder,.intl-tel-input input::placeholder,input[type=tel]::placeholder{color:#6b6b6b;opacity:1}</style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<?php
+    // Poppins is self-hosted (fonts/poppins/*, face rules in css/poppins.css) and inlined: no third-party round trips before text can render
+    $octaFontCssFile = Yii::getPathOfAlias('webroot') . '/css/poppins.css';
+    $octaFontBase = Yii::app()->request->baseUrl;
+    if (is_file($octaFontCssFile)) { ?>
+<style id="poppins-faces"><?php echo str_replace('../fonts/', $octaFontBase . '/fonts/', (string) file_get_contents($octaFontCssFile)); ?></style>
+<?php } else { ?>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<?php } ?>
 
 <style>
     /*new css*/
@@ -455,7 +466,7 @@
     padding-top: 3px;
 }
 .bg_fig{
-background: url("/assets/baccc.webp") !important;
+background: url("<?php echo Yii::app()->request->baseUrl; ?>/assets/baccc.webp") !important;
 background-repeat: no-repeat !important;
 background-size: 80% !important;
 background-position: right !important;
@@ -1105,7 +1116,7 @@ padding-top:20px;
     border-radius: 15px;
 }
 .faq_section input[type=tel]{
-    color:#a0a0a0 !important;
+    color:#6b6b6b !important;
 }
 .faq_section .intl-tel-input .flag-dropdown .selected-flag {
     padding: 12px 16px 12px 6px !important;
@@ -1147,7 +1158,7 @@ span.country-name {
     border-radius: 5px;
     display: flex;
     align-items: center;
-    background-image: url('/images/Screenshot 2024-07-17 150927.jpg');
+    background-image: url('<?php echo Yii::app()->request->baseUrl; ?>/images/Screenshot 2024-07-17 150927.jpg');
     background-size: cover; 
     background-position: center;
 }
@@ -1180,6 +1191,8 @@ img.qrsoc_img {
     margin-right: 5px;
 }
 body ul.footer_nav li a {
+    display: inline-block;
+    padding: 8px 0;
     color: #5b5b5b !important;
     font-size: 14px;
     font-weight: 400 !important;
@@ -2016,7 +2029,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       <!--<li class="js-item">Fortinet NSE 8 traning starting form 2nd June 2025  Weekly 8:00PM-10:00PM IST  </li>-->
     </ul>
 </div>
-                  <script async src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/ticker.js"></script>
+                  <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/ticker.js"></script>
                </div>
                <div class="col-lg-4 col-md-5 p-0">
                   <div class="rght-inner-top-sec">
@@ -3168,7 +3181,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
       <div class="col-xs-12 resp_srh">
            <div id="myOverlay" class="overlay overlay-search">
-  <span class="closebtn" onclick="closeSearch()" title="Close Overlay"><img src="/images/close.png"></span>
+  <span class="closebtn" onclick="closeSearch()" title="Close Overlay"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/close.png" alt="Close search" width="24" height="24"></span>
   <div class="overlay-content">
     <form action="/octa-search" method="get">
       <input type="text" placeholder="Search.." name="search">
@@ -3176,7 +3189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </form>
   </div>
 </div>
-<button class="openBtn" onclick="openSearch()"><img alt="search-icon" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/searchicon.webp"></button>
+<button class="openBtn" onclick="openSearch()"><img alt="Search" width="26" height="26" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/searchicon.webp"></button>
       </div>
       </div>
       
@@ -3201,7 +3214,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
      <div class="sitelogo disp"><a href="<?php echo Yii::app()->request->getBaseUrl(true); ?>"><img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/mainlogoo.webp" alt="Octa Networks" class="img-fluid"></a></div>
      
-<nav id="makmenu-main-2-primary"
+<?php if (!$octaSkipMega) { ?><nav id="makmenu-main-2-primary"
 class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makmenu-responsive makmenu-responsive-default makmenu-responsive-collapse makmenu-horizontal makmenu-transition-shift makmenu-trigger-hover_intent makmenu-skin-black-white-2 makmenu-has-border makmenu-bar-align-full makmenu-items-align-left makmenu-bound-inner makmenu-disable-submenu-scroll makmenu-hide-bkgs makmenu-sub-indicators makmenu-retractors-responsive makmenu-submenu-indicator-closes">
     					<div class="container1">
             <ul id="makmenu-nav-main-2-primary" class="makmenu-nav" data-title="makmenu Demo">
@@ -4444,7 +4457,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
 <li class="makmenu-item makmenu-item-type-custom makmenu-item-object-custom makmenu-item-179 makmenu-item-level-0 makmenu-column makmenu-column-auto makmenu-align-right makmenu-item-mini" ><a class="makmenu-target makmenu-target-with-icon makmenu-item-layout-default makmenu-item-layout-icon_left " target="_blank" href="https://blog.octanetworks.com/" tabindex="0">Blog</a></li> 
               <li class="makmenu-item makmenu-item-type-custom makmenu-item-object-custom makmenu-item-has-children makmenu-item-34 makmenu-item-level-0 makmenu-column makmenu-column-auto makmenu-align-right makmenu-has-submenu-drop makmenu-has-submenu-mega" >
 			  <div id="myOverlay" class="overlay">
-  <span class="closebtn" onclick="closeSearch()" title="Close Overlay"><img src="/images/close.png"></span>
+  <span class="closebtn" onclick="closeSearch()" title="Close Overlay"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/close.png" alt="Close search" width="24" height="24"></span>
   <div class="overlay-content">
     <form action="/octa-search" method="get">
       <input type="text" placeholder="Search.." name="search">
@@ -4453,7 +4466,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
   </div>
 </div>
 
-<button class="openBtn" onclick="openSearch()"><img alt="search-icon" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/searchicon.webp"></button>
+<button class="openBtn" onclick="openSearch()"><img alt="Search" width="26" height="26" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/searchicon.webp"></button>
              
               </li>
              
@@ -4462,7 +4475,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
               <!-- end Segment: 4 -->
             </ul>
 </div>
-          </nav>
+          </nav><?php } ?>
      
       <span id="makmenu-main-2-primary-skipnav"></span>
       
@@ -4546,7 +4559,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
               <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
                 <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"></path>
               </svg>
-              Subscribe Now<img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrow.png" <="" button="">
+              Subscribe Now<img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrow.png" alt="" aria-hidden="true" width="16" height="16">
           </button></div>
         </div>
 
@@ -4628,7 +4641,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
         color: #c0ccda;
     }
 </style>
-<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" media="print" onload="this.media='all';this.onload=null">
 <!-- START - We recommend to place the below code in footer or bottom of your website html  -->
 <script>
     window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
@@ -4651,7 +4664,7 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
   
     var AUTOHIDE = Boolean(0);
   </script>
-  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+  <script>octaLater(function () { octaLoadScript("https://sibforms.com/forms/end-form/build/main.js", null, true); });</script>
 	  
 	  
 	  
@@ -5047,26 +5060,26 @@ class="makmenu makmenu-nojs makmenu-main makmenu-menu-2 makmenu-loc-primary makm
       <!-- <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
          /.container 
          <script src='https://kit.fontawesome.com/a076d05399.js'></script>-->
-      <!--  <script src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/jquery/jquery.min.js"></script>  
-         <script src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/jquery/jquery-migrate.min.js"></script>
-      <script src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/easing/easing.min.js"></script>
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/wow/wow.min.js"></script>
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/isotope/isotope.pkgd.min.js"></script>
-      <script src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/owlcarousel/owl.carousel.min.js"></script>
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/lightbox/js/lightbox.min.js"></script>
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/mobile-nav/mobile-nav.js"></script>
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/waypoints/waypoints.min.js"></script>
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/counterup/counterup.min.js"></script>
-       <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/hc-offcanvas-nav.js"></script>
-       <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/jquery.fancybox.min.js"></script>
+      <!--  <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/jquery/jquery.min.js"></script>  
+         <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/jquery/jquery-migrate.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/easing/easing.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/wow/wow.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/isotope/isotope.pkgd.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/owlcarousel/owl.carousel.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/lightbox/js/lightbox.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/mobile-nav/mobile-nav.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/waypoints/waypoints.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/lib/counterup/counterup.min.js"></script>
+       <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/hc-offcanvas-nav.js"></script>
+       <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/jquery.fancybox.min.js"></script>
        
       <!-- Contact Form JavaScript File -->
       <!-- <script src="<?php echo Yii::app()->request->getBaseUrl(true)?>/contactform/contactform.js"></script>-->
       <!-- Template Main Javascript File -->
-      <script async src="<?php echo Yii::app()->request->getBaseUrl(true)?>/js/main.js"></script>
-      <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/intlTelInput.js"></script>
-      <script src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/lazysizes.min.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true)?>/js/main.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/intlTelInput.js"></script>
+      <script defer src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/js/lazysizes.min.js"></script>
       
       <script>
          /* TOP BAR SCROLLING */
@@ -5268,7 +5281,7 @@ $(document).ready(function(){
          </a>
          <a aria-label="skype" target=_blank href="skype:info@octanetworks.com?chat" class="skyp" style="padding: 8px 0;background: #4dcbff;"><i class="fa fa-skype" aria-hidden="true"></i></a>
         </div>
-          <a aria-label="name" class="icon_click"><i class="fa fa-share-alt"></i></a>
+          <a href="#" role="button" aria-label="Toggle social links" class="icon_click"><i class="fa fa-share-alt"></i></a>
       </div>
       
       
@@ -5319,12 +5332,14 @@ $(document).ready(function(){
       <!--------------telephone code open----------->
       
             <script>
+                  $(function () {
                   $("#mobile-number").intlTelInput(); 
                   $("#mobile-number1").intlTelInput(); 
                   $("#mobile-number2").intlTelInput();
                   $("#mobile-number3").intlTelInput();
                   $("#mobile-number4").intlTelInput();
                   $("#mobile").intlTelInput();
+                  });
             </script>
             
       <!--------------telepohne code close------------------->
@@ -5344,7 +5359,7 @@ function closeSearch() {
 </script>
 
 <script>
-        (function($) {
+        jQuery(function($) {
           'use strict';
 
           // call our plugin
@@ -5421,7 +5436,7 @@ function closeSearch() {
               update(removeData);
             }
           });
-        })(jQuery);
+        });
       </script>
       
       <script>
@@ -5434,7 +5449,8 @@ $(document).ready(function(){
       
 <script>
 $(document).ready(function(){
-  $(".icon_click").click(function(){
+  $(".icon_click").click(function(e){
+    e.preventDefault();
     $(".icon_none").animate({
       width: "toggle"
     });
@@ -5456,11 +5472,12 @@ window._linkedin_data_partner_ids.push(_linkedin_partner_id);
     (function(l) {
     if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
     window.lintrk.q=[]}
+    octaLater(function () {
     var s = document.getElementsByTagName("script")[0];
     var b = document.createElement("script");
     b.type = "text/javascript";b.async = true;
     b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-    s.parentNode.insertBefore(b, s);})(window.lintrk);
+    s.parentNode.insertBefore(b, s);});})(window.lintrk);
 </script>
 
 <noscript>
@@ -5616,33 +5633,37 @@ $(function () {
 
 
 <script>
-// Select the buttons with the class "owl-dot"
-var buttons = document.querySelectorAll('.owl-dot');
-
-// Set the aria-label attribute for each button
-buttons.forEach(function(button) {
-  if (button.classList.contains('owl-dot')) {
-    // Add a label for the "Previous Slide" button
-    button.setAttribute('aria-label', 'owl-dot-btn');
-  } else if (button.classList.contains('owl-dot')) {
-    // Add a label for the "Next Slide" button
-    button.setAttribute('aria-label', 'owl-dot-btn');
-  }
+jQuery(function ($) {
+  /* accessibility labels for the dynamically generated owl carousel controls */
+  $('.owl-dot').each(function (idx) { this.setAttribute('aria-label', 'Go to slide ' + (idx + 1)); });
+  $('.owl-prev').attr('aria-label', 'Previous slide').removeAttr('role');
+  $('.owl-next').attr('aria-label', 'Next slide').removeAttr('role');
 });
 </script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
+octaLater(function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
 s1.src='https://embed.tawk.to/699d63c14e09341c35186d46/1ji7crb3u';
 s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
-})();
+});
 </script>
 <!--End of Tawk.to Script-->
-   </body>
+   <script>
+if (window.matchMedia && window.matchMedia('(min-width:1025px)').matches && !document.getElementById('makmenu-main-2-primary')) {
+    document.cookie = 'octa_desktop=1;path=/;max-age=86400'; location.reload();
+}
+</script>
+</body>
 </html>
-
+<?php
+$octaHtml = HtmlMinifier::minify(ImageOptimizer::filter(ob_get_clean())); // comments are gone after this
+if ($octaCriticalCss !== '') {
+    $octaHtml = LateAssets::apply($octaHtml);
+}
+echo $octaHtml;
+?>

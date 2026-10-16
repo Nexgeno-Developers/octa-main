@@ -20,33 +20,57 @@
                <div class="<?=$class?>">
                   <?php if ($sliders->link != "") { ?><a href="<?=$sliders->link?>"><?php } ?>
                   <!--<img class="slide-image" src="<?php echo Yii::app()->request->getBaseURL(true);?>/img/slider_images/<?=$sliders->image?>" alt="<?=$sliders->alt?>">-->
+				  <?php
+				  $sliderBase = Yii::app()->request->getBaseURL(true) . '/img/slider_images/';
+				  $sliderDir = Yii::getPathOfAlias('webroot') . '/img/slider_images/';
+				  $sliderUrl = function ($file) use ($sliderBase) { return $sliderBase . str_replace(' ', '%20', $file); };
+				  // optimised WebP variants (name-800.webp / name-1200.webp) are used when they exist
+				  $sliderVariant = function ($file, $w) use ($sliderDir) {
+				      $v = preg_replace('/\.[^.]+$/', '', $file) . '-' . $w . '.webp';
+				      return is_file($sliderDir . $v) ? $v : null;
+				  };
+				  if ($count == 1) {
+				      // preload the hero image (LCP) so the browser requests it straight from <head>
+				      $heroMobile = $sliderVariant(!empty($sliders->image_mobile) ? $sliders->image_mobile : $sliders->image, 800);
+				      $heroDesktop = $sliderVariant($sliders->image, 1200);
+				      // emitted at the very top of <head> by layouts/main.php
+				      $heroPreloads = array();
+				      if ($heroMobile) { $heroPreloads[] = array('href' => $sliderUrl($heroMobile), 'media' => '(max-width: 800px)'); }
+				      if ($heroDesktop) { $heroPreloads[] = array('href' => $sliderUrl($heroDesktop), 'media' => '(min-width: 801px)'); }
+				      Yii::app()->params['heroPreloads'] = $heroPreloads;
+				  }
+				  $dimFile = $sliderDir . $sliders->image;
+				  $dim = (empty($sliders->image_mobile) && !empty($sliders->image) && is_file($dimFile) && !preg_match('/\.php$/i', $sliders->image)) ? @getimagesize($dimFile) : false;
+				  ?>
 				  <picture>
-				    <?php if (!empty($sliders->image_mobile)) { ?>
-					  <source srcset="<?php echo Yii::app()->request->getBaseURL(true);?>/img/slider_images/<?=$sliders->image_mobile?>" media="(max-width: 800px)">
+				    <?php if (!empty($sliders->image_mobile)) {
+				        $m800 = $sliderVariant($sliders->image_mobile, 800);
+				        if ($m800) { ?>
+					  <source srcset="<?php echo $sliderUrl($m800); ?>" media="(max-width: 800px)" type="image/webp">
 					<?php } ?>
-					<?php if (!empty($sliders->image)) { ?>
-					  <source srcset="<?php echo Yii::app()->request->getBaseURL(true);?>/img/slider_images/<?=$sliders->image?>">
-					  
-					  <?php 
-					  if ($count == 1) {
-					    // Load the first image immediately
-					    echo '<img class="slide-image" src="' . Yii::app()->request->getBaseURL(true) . '/img/slider_images/' . $sliders->image . '" alt="' . $sliders->alt . '" >';
-					  } else {
-					    // Add lazy loading attribute to the rest of the images
-					    echo '<img class="slide-image" src="' . Yii::app()->request->getBaseURL(true) . '/img/slider_images/' . $sliders->image . '" alt="' . $sliders->alt . '" loading="lazy">';
-					  }
-					  ?>
+					  <source srcset="<?php echo $sliderUrl($sliders->image_mobile); ?>" media="(max-width: 800px)">
+					<?php } else {
+					    $d800 = $sliderVariant($sliders->image, 800);
+					    if ($d800) { ?>
+					  <source srcset="<?php echo $sliderUrl($d800); ?>" media="(max-width: 800px)" type="image/webp">
+					<?php } } ?>
+					<?php if (!empty($sliders->image)) {
+					    $d1200 = $sliderVariant($sliders->image, 1200);
+					    if ($d1200) { ?>
+					  <source srcset="<?php echo $sliderUrl($d1200); ?>" type="image/webp">
+					<?php } ?>
+					  <img class="slide-image" src="<?php echo $sliderUrl($sliders->image); ?>" alt="<?php echo CHtml::encode($sliders->alt); ?>"<?php echo empty($sliders->image_mobile) ? '' : ' data-nodim="1"'; ?><?php if ($dim) { echo ' width="' . $dim[0] . '" height="' . $dim[1] . '"'; } ?><?php echo ($count == 1) ? ' fetchpriority="high" decoding="async"' : ' loading="lazy" decoding="async"'; ?>>
 					<?php } ?>
 					</picture>
                   <?php if ($sliders->link != "") { ?></a><?php } ?>
                </div>
                <?php 	} ?>
             </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev" aria-label="Previous slide">
             <span class="glyphicon glyphicon-chevron-left"></span>
             <span class="sr-only">Previous</span>
             </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <a class="right carousel-control" href="#myCarousel" data-slide="next" aria-label="Next slide">
             <span class="glyphicon glyphicon-chevron-right"></span>
             <span class="sr-only">Next</span>
             </a>
@@ -102,7 +126,7 @@
         
         <div class="bat_maidiv">
         <div class="button_exp mt-2">
-                 <a class="enquire" data-toggle="modal" data-target="#enroll_popup">Contact Us Now <img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrnew.webp" alt="Cisco"></a>  
+                 <a class="enquire" href="#" role="button" data-toggle="modal" data-target="#enroll_popup">Contact Us Now <img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrnew.webp" alt="Cisco"></a>  
             </div>
             </div>
       </div>
@@ -139,13 +163,13 @@
                    <div class="main">
           <div class="big_circle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="web design icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="web design icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/game-design-icon.png" alt="game design icon" /> -->
             </div>
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="game dev icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="game dev icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/ui-ux-icon.png" alt="ui-ux icon" /> -->
@@ -153,7 +177,7 @@
           </div>
           <div class="cir_cle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="app icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="app icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/blockchain-icon.png" alt="blockchain icon" /> -->
@@ -222,7 +246,7 @@
          
         <div class="bat_maidiv">
         <div class="button_exp mt-2">
-                 <a class="enquire" data-toggle="modal" data-target="#new_popup">Reach Out for Assistance <img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrnew.webp" alt="Cisco"></a>
+                 <a class="enquire" href="#" role="button" data-toggle="modal" data-target="#new_popup">Reach Out for Assistance <img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrnew.webp" alt="Cisco"></a>
             </div>
             </div>
       </div>
@@ -273,7 +297,7 @@
         
         <div class="bat_maidiv">
         <div class="button_exp mt-2">
-                 <a class="enquire" data-toggle="modal" data-target="#ccie_popup">Ask for a Free Consultation <img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrnew.webp" alt="Cisco"></a>
+                 <a class="enquire" href="#" role="button" data-toggle="modal" data-target="#ccie_popup">Ask for a Free Consultation <img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrnew.webp" alt="Cisco"></a>
             </div>
             </div>
       </div>
@@ -385,18 +409,18 @@
                      <?php $dcounter++;} ?>
                   </div>
                   <!-- Left and right controls -->
-                  <a class="left carousel-control tes-slide-caro" href="#myCarousel1" data-slide="prev">
+                  <a class="left carousel-control tes-slide-caro" href="#myCarousel1" data-slide="prev" aria-label="Previous slide">
                   <span class="glyphicon glyphicon-chevron-left"></span>
                   <span class="sr-only">Previous</span>
                   </a>
-                  <a class="right carousel-control tes-slide-caro" href="#myCarousel1" data-slide="next">
+                  <a class="right carousel-control tes-slide-caro" href="#myCarousel1" data-slide="next" aria-label="Next slide">
                   <span class="glyphicon glyphicon-chevron-right"></span>
                   <span class="sr-only">Next</span>
                   </a>
                </div>
              </div>
              <div class="col-lg-1 col-md- col-sm-12 col-xs-12">
-                 <a class="right carousel-control" href="#myCarousel1" data-slide="next">
+                 <a class="right carousel-control" href="#myCarousel1" data-slide="next" aria-label="Next slide">
                  <div class="vid_arrow">
                  <img src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/assets/arrnew.webp" alt="Next">
                   </a>
@@ -447,7 +471,7 @@
                <div class="row">
                              <div class="col-md-4 col-sm-3 col-xs-6 pd0">
                                     <div class="our-team">
-                                       <img loading="lazy" class="lazyload" data-src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/Media (1).jpg" alt="">
+                                       <img loading="lazy" decoding="async" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/Media (1).jpg" alt="">
                                       
                                         <div class="team-prof">
                                             <h3>Khaled Gamal Ali Abd Elghani</h3>
@@ -458,7 +482,7 @@
                             
                              <div class="col-md-4 col-sm-3 col-xs-6 pd0">
                                     <div class="our-team">
-                                       <img loading="lazy" class="lazyload" data-src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (5).png" alt="">
+                                       <img loading="lazy" decoding="async" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (5).png" alt="">
                                         <div class="team-prof">
                                             <h3>Raed Musaab </h3>
                                             <span>Data Center v3.1 #60498</span>
@@ -468,7 +492,7 @@
                              
                              <!--<div class="col-md-4 col-sm-3 col-xs-6 pd0">-->
                              <!--       <div class="our-team">-->
-                             <!--           <img loading="lazy" class="lazyload" data-src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/c43b4599-175d-4a50-aa0f-b96476d63165.webp" alt="">-->
+                             <!--           <img loading="lazy" decoding="async" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/c43b4599-175d-4a50-aa0f-b96476d63165.webp" alt="">-->
                              <!--           <div class="team-prof">-->
                              <!--               <h3>Manish Kumar Tiwari </h3>-->
                              <!--               <span>CCIE Security v6.1 #68730</span>-->
@@ -477,7 +501,7 @@
                              <!--</div>-->
                              <div class="col-md-4 col-sm-3 col-xs-6 pd0">
                                     <div class="our-team">
-                                        <img loading="lazy" class="lazyload" data-src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (8).png" alt="">
+                                        <img loading="lazy" decoding="async" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (8).png" alt="">
                                         <div class="team-prof">
                                             <h3>Priyadharshini Mariya Raj  </h3>
                                             <span>Collaboration v3.1  #69672</span>
@@ -487,7 +511,7 @@
                              
                              <div class="col-md-4 col-sm-3 col-xs-6 pd0">
                                     <div class="our-team">
-                                       <img loading="lazy" class="lazyload" data-src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (6).png" alt="">
+                                       <img loading="lazy" decoding="async" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (6).png" alt="">
                                         <div class="team-prof">
                                             <h3>Ahmed Osama Ahmed Mohamed  </h3>
                                             <span>Collaboration v3.1  #69643</span>
@@ -496,7 +520,7 @@
                              </div> 
                              <div class="col-md-4 col-sm-3 col-xs-6 pd0">
                                     <div class="our-team">
-                                       <img loading="lazy" class="lazyload" data-src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (7).png" alt="">
+                                       <img loading="lazy" decoding="async" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (7).png" alt="">
                                         <div class="team-prof">
                                             <h3>Tshepiso Macheng  </h3>
                                             <span>Service Provider v5.1 #69685</span>
@@ -507,7 +531,7 @@
                              
                              <div class="col-md-4 col-sm-3 col-xs-6 pd0">
                                     <div class="our-team">
-                                        <img loading="lazy" class="lazyload" data-src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (9).png" alt="">
+                                        <img loading="lazy" decoding="async" src="<?php echo Yii::app()->request->getBaseUrl(true); ?>/img/stories/shared image (9).png" alt="">
                                         <div class="team-prof">
                                             <h3>Muhammad Omer Farooq </h3>
                                             <span>Collaboration v3.1  #696709</span>
@@ -833,13 +857,13 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
                    <div class="main">
           <div class="big_circle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="web design icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="web design icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/game-design-icon.png" alt="game design icon" /> -->
             </div>
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="game dev icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="game dev icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/ui-ux-icon.png" alt="ui-ux icon" /> -->
@@ -847,7 +871,7 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
           </div>
           <div class="cir_cle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="app icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="app icon" />
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/blockchain-icon.png" alt="blockchain icon" /> -->
@@ -878,14 +902,14 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
                    <div class="main">
           <div class="big_circle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="web design icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="web design icon" />
               <!--<img src="/img/vendor/others.jpg" alt="web design icon" />-->
             </div>
             <div class="ic_block">
               <!-- <img src="https://www.yudiz.com/codepen/animated-portfolio/game-design-icon.png" alt="game design icon" /> -->
             </div>
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="game dev icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="game dev icon" />
               <!--<img src="/img/vendor/juniper.png" alt="web design icon" />-->
             </div>
             <div class="ic_block">
@@ -894,7 +918,7 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
           </div>
           <div class="cir_cle">
             <div class="ic_block">
-              <img src="/images/im-circle.png" alt="app icon" />
+              <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/im-circle.png" alt="app icon" />
               <!--<img src="/img/vendor/cisco.png" alt="app icon" />-->
             </div>
             <div class="ic_block">
@@ -959,9 +983,9 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">
+                <h3 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed">What courses does Octa Networks offer?</a>
-                </h4>
+                </h3>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -971,9 +995,9 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">
+                <h3 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="collapsed">Are there online training options available?</a>
-                </h4>
+                </h3>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -983,9 +1007,9 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">
+                <h3 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="collapsed">Do you offer job guarantee programs?</a>
-                </h4>
+                </h3>
             </div>
             <div id="collapse3" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -995,9 +1019,9 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">
+                <h3 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" class="collapsed">How can I enroll in a course?</a>
-                </h4>
+                </h3>
             </div>
             <div id="collapse4" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -1007,9 +1031,9 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">
+                <h3 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse5" class="collapsed">What support do students receive during their courses?</a>
-                </h4>
+                </h3>
             </div>
             <div id="collapse5" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -1327,10 +1351,10 @@ to companies and clients all over the world.<a href="https://octanetworks.com/ab
  
    
    
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
+<script defer type="text/javascript" src="https://cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
    
 <script>
-$('.marquee').marquee({
+$(function(){ var startMarquee = function(){ $('.marquee').marquee({
    //speed in milliseconds of the marquee
    duration: 18000,
    //gap in pixels between the tickers
@@ -1341,6 +1365,12 @@ $('.marquee').marquee({
    direction: 'up',
    //true or false - should the marquee be duplicated to show an effect of continues flow
    duplicated: true
+}); };
+  var marqueeEl = document.querySelector('.marquee');
+  if (marqueeEl && 'IntersectionObserver' in window) {
+    var marqueeIo = new IntersectionObserver(function(entries){ if (entries[0].isIntersecting) { marqueeIo.disconnect(); startMarquee(); } }, { rootMargin: '200px' });
+    marqueeIo.observe(marqueeEl);
+  } else { startMarquee(); }
 });</script>
  <script>
  $(document).ready(function(){
@@ -1427,7 +1457,15 @@ $('.marquee').marquee({
                     }
                 };
 
-                updateCount();
+                // start counting only when the counter is (about to be) visible: no timers/layout work while off-screen
+                if ('IntersectionObserver' in window) {
+                    const io = new IntersectionObserver((entries) => {
+                        if (entries[0].isIntersecting) { io.disconnect(); updateCount(); }
+                    }, { rootMargin: '100px' });
+                    io.observe(counter);
+                } else {
+                    updateCount();
+                }
             });
         });
     </script>
