@@ -148,11 +148,8 @@
         $octaCssDir = Yii::getPathOfAlias('webroot') . '/css/';
         if (is_file($octaCssDir . 'critical-mobile.css')) {
             $octaCss = (string) file_get_contents($octaCssDir . 'critical-mobile.css');
-            $octaHash = '';
-            foreach (array('style.css', 'main_css_mega_mnu.css', 'hover.css', 'bootstrap.min.css', 'stye_mega_menu.css', 'demo.css') as $octaSrc) {
-                $octaHash .= is_file($octaCssDir . $octaSrc) ? md5_file($octaCssDir . $octaSrc) : '';
-            }
-            if (strpos($octaCss, '/*src:' . md5($octaHash) . '*/') === 0) {
+            $octaHash = OctaCss::hash(array('style.css', 'main_css_mega_mnu.css', 'hover.css', 'bootstrap.min.css', 'stye_mega_menu.css', 'demo.css'));
+            if (strpos($octaCss, '/*src:' . $octaHash . '*/') === 0) {
                 $octaCriticalCss = $octaCss;
             }
         }
@@ -5675,13 +5672,10 @@ if ($octaCriticalCss !== '') {
     $octaCombined = null;
     $octaPhoneFile = Yii::getPathOfAlias('webroot') . '/css/phone-home.css';
     if (is_file($octaPhoneFile)) {
-        $octaHash = '';
-        foreach (array('style.css', 'main_css_mega_mnu.css', 'hover.css', 'bootstrap.min.css', 'stye_mega_menu.css', 'demo.css', '../lib/owlcarousel/assets/owl.carousel.min.css', '../lib/lightbox/css/lightbox.min.css', 'jquery-ui.css', 'intlTelInput.css', 'jquery.fancybox.css') as $octaSrc) {
-            $octaHash .= is_file(Yii::getPathOfAlias('webroot') . '/css/' . $octaSrc) ? md5_file(Yii::getPathOfAlias('webroot') . '/css/' . $octaSrc) : '';
-        }
+        $octaHash = OctaCss::hash(array('style.css', 'main_css_mega_mnu.css', 'hover.css', 'bootstrap.min.css', 'stye_mega_menu.css', 'demo.css', '../lib/owlcarousel/assets/owl.carousel.min.css', '../lib/lightbox/css/lightbox.min.css', 'jquery-ui.css', 'intlTelInput.css', 'jquery.fancybox.css'));
         $octaHead = (string) file_get_contents($octaPhoneFile, false, null, 0, 48);
-        if (strpos($octaHead, '/*src:' . md5($octaHash) . '*/') === 0) {
-            $octaCombined = Yii::app()->request->getBaseUrl(true) . '/css/phone-home.css?v=' . substr(md5($octaHash), 0, 8);
+        if (strpos($octaHead, '/*src:' . $octaHash . '*/') === 0) {
+            $octaCombined = Yii::app()->request->getBaseUrl(true) . '/css/phone-home.css?v=' . substr($octaHash, 0, 8);
         }
     }
     // the home page on phones has no desktop mega menu, WordPress-era sliders or jQuery UI widgets: do not even load them

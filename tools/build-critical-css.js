@@ -41,7 +41,7 @@ const phoneUA = 'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKi
 			puppeteer: { getBrowser: () => browser },
 		});
 		// the layout compares this hash with the current stylesheets and ignores the file when they have changed
-		const hash = crypto.createHash('md5').update(sources.map(f => crypto.createHash('md5').update(fs.readFileSync(path.join(root, f))).digest('hex')).join('')).digest('hex');
+		const hash = crypto.createHash('md5').update(sources.map(f => crypto.createHash('md5').update(fs.readFileSync(path.join(root, f), 'utf8').split(String.fromCharCode(13, 10)).join(String.fromCharCode(10))).digest('hex')).join('')).digest('hex');
 		fs.writeFileSync(path.join(root, 'css/critical-mobile.css'), '/*src:' + hash + '*/' + critical);
 		console.log('css/critical-mobile.css written:', critical.length, 'bytes');
 	} finally {

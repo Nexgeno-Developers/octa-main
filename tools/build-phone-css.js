@@ -90,7 +90,7 @@ function walk(dir, ext, out = []) {
 		}
 	}
 	const minified = require('lightningcss').transform({ filename: 'phone-home.css', code: Buffer.from(out), minify: true, errorRecovery: true }).code.toString();
-	const hash = crypto.createHash('md5').update(sources.map(f => crypto.createHash('md5').update(fs.readFileSync(path.join(root, f))).digest('hex')).join('')).digest('hex');
+	const hash = crypto.createHash('md5').update(sources.map(f => crypto.createHash('md5').update(fs.readFileSync(path.join(root, f), 'utf8').split(String.fromCharCode(13, 10)).join(String.fromCharCode(10))).digest('hex')).join('')).digest('hex');
 	fs.writeFileSync(path.join(root, 'css/phone-home.css'), '/*src:' + hash + '*/' + minified);
 	console.log('css/phone-home.css:', minified.length, 'bytes (from', before + ')');
 })().catch(e => { console.error(e); process.exit(1); });
