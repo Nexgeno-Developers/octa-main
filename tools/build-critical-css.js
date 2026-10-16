@@ -33,11 +33,11 @@ const phoneUA = 'Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKi
 			width: 412,
 			height: 900,
 			userAgent: phoneUA,
-			blockJSRequests: false,
+			blockJSRequests: true,
 			timeout: 60000,
 			renderWaitTime: 1500,
 			keepLargerMediaQueries: false,
-			forceInclude: [/^\.carousel/, /^\.item/, /^\.slide-image/, /^\.sr-only/, /^\.glyphicon/, /^\.fade/, /^\.in$/, /^\.hc-/, /^\.toggle/, /^\.arrow_icon/, /^\.openBtn/, /^\.overlay/],
+			forceInclude: [/^\.carousel/, /^\.item/, /^\.slide-image/, /^\.sr-only/, /^\.glyphicon/, /^\.fade/, /^\.in$/, /^\.toggle/, /^\.arrow_icon/, /^\.openBtn/, /^\.overlay/],
 			puppeteer: { getBrowser: () => browser },
 		});
 		// the layout compares this hash with the current stylesheets and ignores the file when they have changed

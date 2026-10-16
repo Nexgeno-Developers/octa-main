@@ -16,7 +16,7 @@
  */
 class LateAssets
 {
-	public static function apply($html)
+	public static function apply($html, $combinedCss = null, $skip = array())
 	{
 		if (!is_string($html) || strpos($html, '</head>') === false) {
 			return $html;
@@ -43,6 +43,21 @@ class LateAssets
 			$html
 		);
 
+		// a purged, combined stylesheet replaces the individual local ones it was built from (same cascade order)
+		if ($combinedCss) {
+			$covered = '#/(css/(style|main_css_mega_mnu|hover|bootstrap\\.min|stye_mega_menu|demo|jquery-ui|intlTelInput|jquery\\.fancybox)|lib/owlcarousel/assets/owl\\.carousel\\.min|lib/lightbox/css/lightbox\\.min)\\.css#';
+			$merged = array();
+			$placed = false;
+			foreach ($css as $href) {
+				if (preg_match($covered, $href)) {
+					if (!$placed) { $merged[] = $combinedCss; $placed = true; }
+				} else {
+					$merged[] = $href;
+				}
+			}
+			$css = $merged;
+		}
+
 		// jQuery + bootstrap.js (synchronous in <head>) go first in the late list, replaced by the stub
 		$stubPlaced = false;
 		$html = preg_replace_callback(
@@ -68,6 +83,18 @@ class LateAssets
 			},
 			$html
 		);
+
+		// scripts/styles the caller knows this page does not use (matched against the URL)
+		if ($skip) {
+			$drop = function ($src) use ($skip) {
+				foreach ($skip as $needle) {
+					if (strpos($src, $needle) !== false) { return false; }
+				}
+				return true;
+			};
+			$js = array_values(array_filter($js, $drop));
+			$css = array_values(array_filter($css, $drop));
+		}
 
 		// lazysizes is only needed when the page actually uses it (native loading="lazy" covers the rest)
 		if (strpos($html, 'lazyload') === false) {

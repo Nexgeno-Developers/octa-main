@@ -158,7 +158,7 @@
         }
     }
     if ($octaCriticalCss !== '') { ?>
-    <style id="critical-css"><?php echo $octaCriticalCss; ?></style>
+    <style id="critical-css"><?php echo str_replace('url(../', 'url(' . Yii::app()->request->baseUrl . '/', $octaCriticalCss); ?></style>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/style.css?v=1.2" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/style.css?v=1.2"></noscript>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/main_css_mega_mnu.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/main_css_mega_mnu.css"></noscript>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css"></noscript>
@@ -170,8 +170,16 @@
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/bootstrap.min.css">
     <?php } ?>
     <!-- Non-critical CSS (loaded without blocking first paint) -->
+    <?php if ($octaCriticalCss === '') { ?>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css"><?php /* menu / header layout: render-blocking on purpose so the menu is styled on first paint */ ?>
+    <?php } else { ?>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css"></noscript>
+    <?php } ?>
+    <?php if ($octaCriticalCss === '') { ?>
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css"><?php /* menu / header layout: render-blocking on purpose so the menu is styled on first paint */ ?>
+    <?php } else { ?>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css"></noscript>
+    <?php } ?>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/owlcarousel/assets/owl.carousel.min.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/owlcarousel/assets/owl.carousel.min.css"></noscript>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/lightbox/css/lightbox.min.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/lib/lightbox/css/lightbox.min.css"></noscript>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/jquery-ui.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/jquery-ui.css"></noscript>
@@ -5663,7 +5671,21 @@ if (window.matchMedia && window.matchMedia('(min-width:1025px)').matches && !doc
 <?php
 $octaHtml = HtmlMinifier::minify(ImageOptimizer::filter(ob_get_clean())); // comments are gone after this
 if ($octaCriticalCss !== '') {
-    $octaHtml = LateAssets::apply($octaHtml);
+    // css/phone-home.css = all late local stylesheets, purged (tools/build-phone-css.js); ignored when stale
+    $octaCombined = null;
+    $octaPhoneFile = Yii::getPathOfAlias('webroot') . '/css/phone-home.css';
+    if (is_file($octaPhoneFile)) {
+        $octaHash = '';
+        foreach (array('style.css', 'main_css_mega_mnu.css', 'hover.css', 'bootstrap.min.css', 'stye_mega_menu.css', 'demo.css', '../lib/owlcarousel/assets/owl.carousel.min.css', '../lib/lightbox/css/lightbox.min.css', 'jquery-ui.css', 'intlTelInput.css', 'jquery.fancybox.css') as $octaSrc) {
+            $octaHash .= is_file(Yii::getPathOfAlias('webroot') . '/css/' . $octaSrc) ? md5_file(Yii::getPathOfAlias('webroot') . '/css/' . $octaSrc) : '';
+        }
+        $octaHead = (string) file_get_contents($octaPhoneFile, false, null, 0, 48);
+        if (strpos($octaHead, '/*src:' . md5($octaHash) . '*/') === 0) {
+            $octaCombined = Yii::app()->request->getBaseUrl(true) . '/css/phone-home.css?v=' . substr(md5($octaHash), 0, 8);
+        }
+    }
+    // the home page on phones has no desktop mega menu, WordPress-era sliders or jQuery UI widgets: do not even load them
+    $octaHtml = LateAssets::apply($octaHtml, $octaCombined, array('jquery-ui.js', 'mega_menu_rest.js', 'jquery.flexslider', 'flexslider.min.css', 'superfish', 'supersubs'));
 }
 echo $octaHtml;
 ?>
