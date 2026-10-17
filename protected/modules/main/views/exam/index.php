@@ -2722,7 +2722,7 @@ if(!empty($exam->h1_description)){ ?>
        const init = () => {
        moveActiveLine(links[0]);
        document.documentElement.style.setProperty('--section-offset', sectionOffset);
-       }v
+       }
    
        links.forEach((link, index) => link.addEventListener('click', () => {
        userScroll = false;

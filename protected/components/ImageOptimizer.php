@@ -23,7 +23,8 @@ class ImageOptimizer
 		}
 
 		$count = 0;
-		$html = preg_replace_callback('/<img\b[^>]*>/i', function ($m) use (&$count) {
+		// quoted attribute values may contain ">" (e.g. alt="Name<br> Role"), so they are matched as a unit
+		$html = preg_replace_callback('/<img\b(?:[^>"\']|"[^"]*"|\'[^\']*\')*>/i', function ($m) use (&$count) {
 			$tag = $m[0];
 			$count++;
 
