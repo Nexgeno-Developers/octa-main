@@ -15888,3 +15888,15 @@ span.closebtn img {
 }
 }
 
+/* Closed dropdowns stay in place at 600px (shift transition). Inner tabs force
+   visibility:visible, so invisible links still receive clicks. Block them. */
+.makmenu .makmenu-item:not(.makmenu-active) > .makmenu-submenu-drop,
+.makmenu .makmenu-item:not(.makmenu-active) > .makmenu-submenu-drop * {
+	pointer-events: none !important;
+}
+
+.makmenu-nojs .makmenu-item:hover > .makmenu-submenu-drop,
+.makmenu-nojs .makmenu-item:hover > .makmenu-submenu-drop * {
+	pointer-events: auto !important;
+}
+
