@@ -1,3 +1,9 @@
+<style>
+/* gallery category buttons: wrap into clean rows instead of floating over each other */
+.photo_lst ul.list-inline{display:flex !important;flex-wrap:wrap;justify-content:center;gap:30px 12px;margin:0 0 24px !important;padding:0 !important}
+.photo_lst ul.list-inline > li.boxgall{float:none !important;position:relative;width:auto !important;height:auto !important;margin:0 !important;display:block !important}
+@media(max-width:600px){.photo_lst ul.list-inline{gap:16px 10px}}
+</style>
 
 
 
