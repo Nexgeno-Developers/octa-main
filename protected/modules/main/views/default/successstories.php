@@ -618,6 +618,11 @@
 
 
 
+<style>
+/* breathing room above and below the "Ladder to a Secure and Highly Paid Jobs" block */
+section.ladder_Section{padding-top:60px !important;padding-bottom:60px !important}
+@media(max-width:767px){section.ladder_Section{padding-top:36px !important;padding-bottom:36px !important}}
+</style>
 <section class="succes_section ladder_Section">
     <div class="container">
         <h4 class="p-0 section_pd_heading">Octa Networks, Ladder to a Secure and Highly Paid Jobs in India and Around
