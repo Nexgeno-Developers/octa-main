@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <?php if (!empty(Yii::app()->params['heroPreloads'])) { foreach (Yii::app()->params['heroPreloads'] as $octaPreload) { ?>
-    <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="<?php echo CHtml::encode($octaPreload['href']); ?>" media="<?php echo CHtml::encode($octaPreload['media']); ?>">
+    <link rel="preload" as="image" fetchpriority="high" href="<?php echo CHtml::encode($octaPreload['href']); ?>"<?php if (!empty($octaPreload['type'])) { ?> type="<?php echo CHtml::encode($octaPreload['type']); ?>"<?php } ?><?php if (!empty($octaPreload['media'])) { ?> media="<?php echo CHtml::encode($octaPreload['media']); ?>"<?php } ?>>
     <?php } } ?>
     <?php if (is_file(Yii::getPathOfAlias('webroot') . '/css/poppins.css')) { $octaFontBase = Yii::app()->request->baseUrl; ?>
     <link rel="preload" as="font" type="font/woff2" crossorigin href="<?php echo $octaFontBase; ?>/fonts/poppins/poppins-400-latin.woff2">
@@ -140,22 +140,22 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <!-- Critical CSS (render blocking) -->
 <?php
-    // Phones get the above-the-fold CSS inline (css/critical-mobile.css, built by tools/build-critical-css.js) and the full
-    // stylesheets load without blocking the first paint. A stale critical file (older than style.css) is ignored.
+    // Phones on the home page always take the fast path: above-the-fold CSS is inlined and the full
+    // stylesheets do not block the first paint. A hash mismatch used to turn this off and drop the
+    // mobile score into the 60s, so a slightly old critical file is still used.
     $octaCriticalCss = '';
-    // only the home page has a critical-CSS file; other pages keep the regular blocking stylesheets
-    if ($octaSkipMega && Yii::app()->controller->route === 'main/default/index') {
-        $octaCssDir = Yii::getPathOfAlias('webroot') . '/css/';
-        if (is_file($octaCssDir . 'critical-mobile.css')) {
-            $octaCss = (string) file_get_contents($octaCssDir . 'critical-mobile.css');
-            $octaHash = OctaCss::hash(array('style.css', 'main_css_mega_mnu.css', 'hover.css', 'bootstrap.min.css', 'stye_mega_menu.css', 'demo.css'));
-            if (strpos($octaCss, '/*src:' . $octaHash . '*/') === 0) {
+    $octaFastHome = $octaSkipMega && Yii::app()->controller->route === 'main/default/index';
+    if ($octaFastHome) {
+        $octaCssFile = Yii::getPathOfAlias('webroot') . '/css/critical-mobile.css';
+        if (is_file($octaCssFile)) {
+            $octaCss = (string) file_get_contents($octaCssFile);
+            if (strncmp($octaCss, '/*src:', 6) === 0 && strpos($octaCss, '{') !== false) {
                 $octaCriticalCss = $octaCss;
             }
         }
     }
-    if ($octaCriticalCss !== '') { ?>
-    <style id="critical-css"><?php echo str_replace('url(../', 'url(' . Yii::app()->request->baseUrl . '/', $octaCriticalCss); ?></style>
+    if ($octaFastHome) { ?>
+    <style id="critical-css"><?php echo str_replace('url(../', 'url(' . Yii::app()->request->baseUrl . '/', $octaCriticalCss); ?>#slider .carousel-inner>.item{display:none}#slider .carousel-inner>.item.active{display:block}#slider img.slide-image{width:100%;height:auto;display:block}</style>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/style.css?v=1.2" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/style.css?v=1.2"></noscript>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/main_css_mega_mnu.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/main_css_mega_mnu.css"></noscript>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/hover.css"></noscript>
@@ -167,12 +167,12 @@
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/bootstrap.min.css">
     <?php } ?>
     <!-- Non-critical CSS (loaded without blocking first paint) -->
-    <?php if ($octaCriticalCss === '') { ?>
+    <?php if (empty($octaFastHome)) { ?>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css"><?php /* menu / header layout: render-blocking on purpose so the menu is styled on first paint */ ?>
     <?php } else { ?>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/stye_mega_menu.css"></noscript>
     <?php } ?>
-    <?php if ($octaCriticalCss === '') { ?>
+    <?php if (empty($octaFastHome)) { ?>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css"><?php /* menu / header layout: render-blocking on purpose so the menu is styled on first paint */ ?>
     <?php } else { ?>
     <link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css" media="print" onload="this.media='all';this.onload=null"><noscript><link rel="stylesheet" href="<?php echo Yii::app()->request->getBaseUrl(true); ?>/css/demo.css"></noscript>
@@ -5667,7 +5667,7 @@ if (window.matchMedia && window.matchMedia('(min-width:1025px)').matches && !doc
 </html>
 <?php
 $octaHtml = HtmlMinifier::minify(ImageOptimizer::filter(ob_get_clean())); // comments are gone after this
-if ($octaCriticalCss !== '') {
+if (!empty($octaFastHome)) {
     // css/phone-home.css = all late local stylesheets, purged (tools/build-phone-css.js); ignored when stale
     $octaCombined = null;
     $octaPhoneFile = Yii::getPathOfAlias('webroot') . '/css/phone-home.css';
@@ -5680,6 +5680,9 @@ if ($octaCriticalCss !== '') {
     }
     // the home page on phones has no desktop mega menu, WordPress-era sliders or jQuery UI widgets: do not even load them
     $octaHtml = LateAssets::apply($octaHtml, $octaCombined, array('jquery-ui.js', 'mega_menu_rest.js', 'jquery.flexslider', 'flexslider.min.css', 'superfish', 'supersubs'));
+}
+if (Yii::app()->controller->route === 'main/default/index') {
+    OctaHomeCache::store($octaHtml, !empty($octaSkipMega));
 }
 echo $octaHtml;
 ?>

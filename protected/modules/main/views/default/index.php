@@ -5,7 +5,7 @@
    <div class="container-fluid">
       <div class="">
          <?php if (!empty($slider)) { ?>
-         <div id="myCarousel" class="carousel slide" data-ride="carousel">
+         <div id="myCarousel" class="carousel slide">
             <div class="carousel-inner">
                <?php 
                   $count = 0;
@@ -24,44 +24,52 @@
 				  $sliderBase = Yii::app()->request->getBaseURL(true) . '/img/slider_images/';
 				  $sliderDir = Yii::getPathOfAlias('webroot') . '/img/slider_images/';
 				  $sliderUrl = function ($file) use ($sliderBase) { return $sliderBase . str_replace(' ', '%20', $file); };
-				  // optimised WebP variants (name-800.webp / name-1200.webp) are used when they exist
-				  $sliderVariant = function ($file, $w) use ($sliderDir) {
-				      $v = preg_replace('/\.[^.]+$/', '', $file) . '-' . $w . '.webp';
-				      return is_file($sliderDir . $v) ? $v : null;
+				  // smaller WebP copies are created for the first slide (the LCP image) and reused when they already exist
+				  $sliderVariant = function ($file, $w, $create) use ($sliderDir) {
+				      if ($file === '' || $file === null) { return null; }
+				      return $create ? OctaSliderImage::variant($sliderDir, $file, $w) : OctaSliderImage::existing($sliderDir, $file, $w);
 				  };
 				  if ($count == 1) {
-				      // preload the hero image (LCP) so the browser requests it straight from <head>
-				      $heroMobile = $sliderVariant(!empty($sliders->image_mobile) ? $sliders->image_mobile : $sliders->image, 800);
-				      $heroDesktop = $sliderVariant($sliders->image, 1200);
-				      // emitted at the very top of <head> by layouts/main.php
-				      $heroPreloads = array();
-				      if ($heroMobile) { $heroPreloads[] = array('href' => $sliderUrl($heroMobile), 'media' => '(max-width: 800px)'); }
-				      if ($heroDesktop) { $heroPreloads[] = array('href' => $sliderUrl($heroDesktop), 'media' => '(min-width: 801px)'); }
-				      Yii::app()->params['heroPreloads'] = $heroPreloads;
-				  }
+				      $octaPhone = OctaDevice::skipDesktopMegaMenu();
+				      $lcpSource = $octaPhone && !empty($sliders->image_mobile) ? $sliders->image_mobile : $sliders->image;
+				      $lcpWidth = $octaPhone ? 800 : 1200;
+				      $lcpFile = $sliderVariant($lcpSource, $lcpWidth, true);
+				      if (!$lcpFile && $octaPhone && !empty($sliders->image_mobile)) {
+				          $lcpFile = $sliders->image_mobile;
+				      }
+				      if (!$lcpFile) { $lcpFile = $sliders->image; }
+				      $lcpMime = OctaSliderImage::mime($lcpFile);
+				      // emitted at the very top of <head>; the URL must be the same one the <img> uses
+				      Yii::app()->params['heroPreloads'] = array(array('href' => $sliderUrl($lcpFile), 'type' => $lcpMime));
+				      $dimFile = $sliderDir . $lcpFile;
+				      $dim = (is_file($dimFile) && !preg_match('/\.php$/i', $lcpFile)) ? @getimagesize($dimFile) : false;
+				      ?>
+				  <img class="slide-image" src="<?php echo $sliderUrl($lcpFile); ?>" alt="<?php echo CHtml::encode($sliders->alt); ?>"<?php if ($dim) { echo ' width="' . (int) $dim[0] . '" height="' . (int) $dim[1] . '"'; } ?> fetchpriority="high" decoding="sync">
+				  <?php } else {
 				  $dimFile = $sliderDir . $sliders->image;
 				  $dim = (empty($sliders->image_mobile) && !empty($sliders->image) && is_file($dimFile) && !preg_match('/\.php$/i', $sliders->image)) ? @getimagesize($dimFile) : false;
 				  ?>
 				  <picture>
 				    <?php if (!empty($sliders->image_mobile)) {
-				        $m800 = $sliderVariant($sliders->image_mobile, 800);
+				        $m800 = $sliderVariant($sliders->image_mobile, 800, false);
 				        if ($m800) { ?>
 					  <source srcset="<?php echo $sliderUrl($m800); ?>" media="(max-width: 800px)" type="image/webp">
 					<?php } ?>
 					  <source srcset="<?php echo $sliderUrl($sliders->image_mobile); ?>" media="(max-width: 800px)">
 					<?php } else {
-					    $d800 = $sliderVariant($sliders->image, 800);
+					    $d800 = $sliderVariant($sliders->image, 800, false);
 					    if ($d800) { ?>
 					  <source srcset="<?php echo $sliderUrl($d800); ?>" media="(max-width: 800px)" type="image/webp">
 					<?php } } ?>
 					<?php if (!empty($sliders->image)) {
-					    $d1200 = $sliderVariant($sliders->image, 1200);
+					    $d1200 = $sliderVariant($sliders->image, 1200, false);
 					    if ($d1200) { ?>
 					  <source srcset="<?php echo $sliderUrl($d1200); ?>" type="image/webp">
 					<?php } ?>
-					  <img class="slide-image" src="<?php echo $sliderUrl($sliders->image); ?>" alt="<?php echo CHtml::encode($sliders->alt); ?>"<?php echo empty($sliders->image_mobile) ? '' : ' data-nodim="1"'; ?><?php if ($dim) { echo ' width="' . $dim[0] . '" height="' . $dim[1] . '"'; } ?><?php echo ($count == 1) ? ' fetchpriority="high" decoding="async"' : ' loading="lazy" decoding="async"'; ?>>
+					  <img class="slide-image" src="<?php echo $sliderUrl($sliders->image); ?>" alt="<?php echo CHtml::encode($sliders->alt); ?>"<?php echo empty($sliders->image_mobile) ? '' : ' data-nodim="1"'; ?><?php if ($dim) { echo ' width="' . $dim[0] . '" height="' . $dim[1] . '"'; } ?> loading="lazy" decoding="async">
 					<?php } ?>
 					</picture>
+				  <?php } ?>
                   <?php if ($sliders->link != "") { ?></a><?php } ?>
                </div>
                <?php 	} ?>
@@ -79,7 +87,13 @@
       </div>
    </div>
 </section>
-
+<script>
+setTimeout(function () {
+  var node = document.getElementById('myCarousel');
+  if (!node || !window.jQuery || !jQuery.fn || !jQuery.fn.carousel) { return; }
+  jQuery(node).carousel({ interval: 5000 });
+}, 15000);
+</script>
 
 <main id="main">
               <?php

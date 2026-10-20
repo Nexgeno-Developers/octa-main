@@ -19,7 +19,7 @@ const variantRe = /-(800|1200)\.webp$/i;
 (async () => {
 	let made = 0;
 	for (const file of fs.readdirSync(dir)) {
-		if (!/\.(jpe?g|png|webp)$/i.test(file) || variantRe.test(file)) {
+		if (!/\.(jpe?g|jfif|png|webp)$/i.test(file) || variantRe.test(file)) {
 			continue;
 		}
 		const src = path.join(dir, file);
