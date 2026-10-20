@@ -352,6 +352,11 @@ $(document).ready(function(){
 	</div>
 </section>
 
+<style>
+/* space between the breadcrumb bar and the "What Students Speak About Us" block */
+section#product-info.succes_section{padding-top:50px !important}
+@media(max-width:767px){section#product-info.succes_section{padding-top:32px !important}}
+</style>
 <section id="product-info" class="succes_section">
 	<div class="container">
 		<h4 class="p-0 section_pd_heading pd_b10"> What Students Speak About Us - Video Testimonials</h4>
